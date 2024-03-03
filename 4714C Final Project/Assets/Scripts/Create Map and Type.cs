@@ -11,13 +11,10 @@ public class CreateMapandType : MonoBehaviour
     //public int lengthOfMap = 10;
     //public int heightOfMap = 10;
     public int obstaclesToSpawn = 10;
-    private float xcount;
-    private float zcount;
-    private float scale;
     private Camera cam;
     private Color backgroundColor;
     private string typeSelection;
-    public int mapSize;
+    public float mapSize;
     private Color mapColor;
 
     public enum levelTypes
@@ -26,6 +23,7 @@ public class CreateMapandType : MonoBehaviour
         Desert,
         Snow
     }
+
     //Allows the user to select their level type in the Unity Editor
     [SerializeField] public levelTypes levelSelect;
     //This stores the level selected, and it will be used in the switch case statement to establish the map
@@ -68,37 +66,40 @@ public class CreateMapandType : MonoBehaviour
 
     void CreateGrassland(Color c)
     {
+        GenerateObstacles("Grassland");
         Color terrainColor = c;
         GameObject Ground;
         Ground = new GameObject("Ground");
         SpriteRenderer spriteRenderer = Ground.AddComponent<SpriteRenderer>();
         spriteRenderer.color = c;
         spriteRenderer.sprite = Sprite.Create(Texture2D.whiteTexture, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f));
-        spriteRenderer.transform.localScale = new Vector3(mapSize, mapSize, 1.0f);
+        spriteRenderer.transform.localScale = new Vector3(mapSize * 1000f, mapSize * 1000f, 1.0f);
         Ground.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
     void CreateDesert(Color c)
     {
+        GenerateObstacles("Desert");
         Color terrainColor = c;
         GameObject Ground;
         Ground = new GameObject("Ground");
         SpriteRenderer spriteRenderer = Ground.AddComponent<SpriteRenderer>();
         spriteRenderer.color = c;
         spriteRenderer.sprite = Sprite.Create(Texture2D.whiteTexture, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f));
-        spriteRenderer.transform.localScale = new Vector3(mapSize, mapSize, 1.0f);
+        spriteRenderer.transform.localScale = new Vector3(mapSize * 1000f, mapSize * 1000f, 1.0f);
         Ground.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
     void CreateSnow(Color c)
     {
+        GenerateObstacles("Snow");
         Color terrainColor = c;
         GameObject Ground;
         Ground = new GameObject("Ground");
         SpriteRenderer spriteRenderer = Ground.AddComponent<SpriteRenderer>();
         spriteRenderer.color = c;
         spriteRenderer.sprite = Sprite.Create(Texture2D.whiteTexture, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f));
-        spriteRenderer.transform.localScale = new Vector3(mapSize, mapSize, 1.0f);
+        spriteRenderer.transform.localScale = new Vector3(mapSize * 1000f, mapSize * 1000f, 1.0f);
         Ground.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
@@ -122,6 +123,57 @@ public class CreateMapandType : MonoBehaviour
             Tree.transform.SetParent(Forest.transform);
         }
     */
+
+    //Used to assign certain prefabs into the scene
+    public GameObject obstaclePrefab;
+    public GameObject grassObs;
+    public GameObject desertObs;
+    public GameObject snowObs;
+    private GameObject allObstacles;
+    private Color obsColor;
+    private float xCoord;
+    private float yCoord;
+    private float scale;
+       //THIS IS CODE FOR GENERATING OBSTACLES, WE NEED TO MAKE THEM UNIQUE TO THE BIOME TYPE
+       void GenerateObstacles(string levelType)
+    {
+        switch(levelType)
+        {
+            case ("Grassland"):
+                obstaclePrefab = grassObs;
+                break;
+            case ("Desert"):
+                obstaclePrefab = desertObs;
+                break;
+            case ("Snow"):
+                obstaclePrefab = snowObs;
+                break;
+        }
+        for (int obstacleSpawned = 0; obstacleSpawned < obstaclesToSpawn; obstacleSpawned++)
+        {
+            //Random values for x and y coordinates, only within the map boundaries
+            //4.9f to prevent the sprite image itself from reaching out of the map
+            xCoord = UnityEngine.Random.Range(-mapSize * 4.9f, mapSize * 4.9f);
+            yCoord = UnityEngine.Random.Range(-mapSize * 4.9f, mapSize * 4.9f);
+            
+            //prevents obstacles from spawning on player start
+            while((xCoord < 3f && xCoord > -3f) && (yCoord < 3f && yCoord > -3f))
+            {
+                xCoord = UnityEngine.Random.Range(-mapSize * 4.9f, mapSize * 4.9f);
+                yCoord = UnityEngine.Random.Range(-mapSize * 4.9f, mapSize * 4.9f);
+            }
+            //this is not used, I'm keeping it here just in case.
+            scale = UnityEngine.Random.Range(0.5f, 1.5f);
+
+            //Creates obstacle and assigns it in world through x and y coordinates. -0.01f for z-axis in case of layer issues
+            Instantiate(obstaclePrefab, new Vector3(xCoord, yCoord, -0.01f), transform.rotation);
+            
+
+            //set to obstacle parent
+            //obstaclePrefab.transform.SetParent(allObstacles.transform);
+        }
+    }
+    
     // Update is called once per frame
     void Update()
     {
