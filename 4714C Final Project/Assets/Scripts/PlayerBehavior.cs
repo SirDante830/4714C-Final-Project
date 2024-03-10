@@ -55,7 +55,12 @@ public class PlayerBehavior : MonoBehaviour
     void PlayerMovement()
     {
         // Change rigidbody velocity (allow player to move) and do it in fixed update for accurate physics interactions.
-        rb2d.velocity = new Vector2(horizontalMovement * playerSpeed, verticalMovement * playerSpeed);
+        //rb2d.velocity = new Vector2(horizontalMovement * playerSpeed, verticalMovement * playerSpeed);
+
+        Vector3 temp = new Vector3(horizontalMovement, verticalMovement, 0f);
+        temp = temp.normalized * Time.fixedDeltaTime * playerSpeed;
+
+        transform.position += temp;
 
         // Run function that changes the player's sprite based on movement.
         UpdateSpriteAnimation();
