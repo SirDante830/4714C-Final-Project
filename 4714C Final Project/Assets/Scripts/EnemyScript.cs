@@ -11,7 +11,6 @@ public class EnemyScript : MonoBehaviour
     private Color classColor;
     private string className;
     private string EnemySelection;
-    public PlayerAttack pa;
     public enum EnemyTypes
     {
         Crawler,
