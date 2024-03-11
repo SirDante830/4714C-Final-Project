@@ -208,6 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd6d60002eff1444ae564889ffebba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 900366479}
   ChosenEnemy: 0
 --- !u!1 &1220587581 stripped
 GameObject:
