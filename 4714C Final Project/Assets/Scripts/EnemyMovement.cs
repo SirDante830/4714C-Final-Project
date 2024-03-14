@@ -17,10 +17,15 @@ public class EnemyMovement : MonoBehaviour
 
     //determines if enemy is ranged or not
     public bool ranged = false;
+    public Animator FlyingDemonSprite;
 
-    // Update is called once per frame
+     void Start()
+    {
+      player = GameObject.FindGameObjectWithTag("Player");   
+    }
     void Update()
     {
+        
         //points enemy to player
         direction = player.transform.position - this.transform.position;
         //the velocity that the enemy moves towards player
@@ -28,15 +33,33 @@ public class EnemyMovement : MonoBehaviour
         //if enemy is ranged, it will stay a distance away from the player to shoot
         if(ranged)
         {
-            if(direction.magnitude > rangeDistance)
+            if(direction.magnitude > rangeDistance)// while in range
             {
                 this.transform.position = this.transform.position + velocity;
+
             }
+          /*  else if(direction.magnitude < rangeDistance)// out of range
+            {
+                direction = Vector3.zero;
+            }*/
         }
-        else
+        
+      else if(!ranged)
         {
             //moves enemy towards player
-            this.transform.position = this.transform.position + velocity;
+          //  direction = Vector3.zero;
+            
+            if(direction.magnitude > 5f && direction.magnitude < 20f)// default range
+            {
+                this.transform.position = this.transform.position + velocity;
+                
+            }
+            if(direction.magnitude < 5f || direction.magnitude > 20f)
+                {
+               direction = Vector3.zero;
+                }
         }
+        FlyingDemonSprite.SetFloat("Horizontal", direction.x);
+        FlyingDemonSprite.SetFloat("Speed", direction.sqrMagnitude);
     }
 }
