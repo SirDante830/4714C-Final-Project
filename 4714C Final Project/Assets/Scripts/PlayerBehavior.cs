@@ -88,7 +88,7 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
     
-    void OnTriggerStay2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Used");
         // If player collides with tag Enemy, then run the take damage function.
