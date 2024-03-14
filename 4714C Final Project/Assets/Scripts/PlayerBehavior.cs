@@ -88,12 +88,14 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
     
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerStay2D(Collider2D collision)
     {
+        Debug.Log("Used");
         // If player collides with tag Enemy, then run the take damage function.
         if (collision.CompareTag("Enemy"))
         {
             TakeDamage();
+           /* StartCoroutine(ConstantDamage());*/
         }
     }
     
@@ -148,6 +150,11 @@ public class PlayerBehavior : MonoBehaviour
         playerAnimator.SetBool("moveUp", movingUp);
         playerAnimator.SetBool("moveDown", movingDown);
     }
+   /* IEnumerator ConstantDamage()
+    {
+        TakeDamage();
+        yield return new WaitForSeconds(1);
+    }*/
 
     // Function that sets the player's class.
     // Will probably change as I think player will have the ability to choose their class.
