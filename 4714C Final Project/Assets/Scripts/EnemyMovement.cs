@@ -49,7 +49,7 @@ public class EnemyMovement : MonoBehaviour
             //moves enemy towards player
           //  direction = Vector3.zero;
             
-            if(direction.magnitude > 5f && direction.magnitude < 20f)// default range
+            if(direction.magnitude > 5f)// default range
             {
                 this.transform.position = this.transform.position + velocity;
                 
