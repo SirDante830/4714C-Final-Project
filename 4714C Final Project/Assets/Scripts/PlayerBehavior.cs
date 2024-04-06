@@ -30,6 +30,14 @@ public class PlayerBehavior : MonoBehaviour
     public GameObject playerWeapon;
     private float playerAttackSpeed = 10.5f;
 
+    // Create a list of the various classes that the player can be.
+    [HideInInspector] public List<string> playerClassName = new List<string>()
+    {
+        "archer",
+        "wizard",
+        "blueberry"
+    };
+
     void Start()
     {
         // Set reference to script.
@@ -160,14 +168,6 @@ public class PlayerBehavior : MonoBehaviour
     // Will probably change as I think player will have the ability to choose their class.
     void PlayerClass()
     {
-        // Create a list of the various classes that the player can be.
-        List<string> playerClassName = new List<string>()
-            { 
-                "archer", 
-                "wizard", 
-                "blueberry" 
-            };
-
         // Create a random number that uses the length of the list as the max value.
         float randomNum = Random.Range(0, playerClassName.Count);
 
