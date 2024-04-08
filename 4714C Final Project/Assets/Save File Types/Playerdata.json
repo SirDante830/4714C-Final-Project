@@ -1,0 +1,21 @@
+
+{
+  "players": [
+    {
+      "name": "Wizard",
+      "health": 90,
+      "damage":  120
+    },
+    {
+      "name": "Ranger",
+      "health": 80,
+      "damage": 130
+    },
+    {
+      "name": "Warrior",
+      "health": 130,
+      "damage":  90
+    }
+
+  ]
+}
