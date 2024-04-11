@@ -10,16 +10,10 @@ public class PlayerAttack : MonoBehaviour
     private int enemyHitScore = 10; // This is the amount of score the player is given when they hit an enemy.
     private int damageDealt = 25; // This is the amount of damage the player's weapon deals to enemies.
 
-    // Reference to UI script.
-    private TempPlayerScoreAndHealth tP;
-
     void Start()
     {
         // Assign the reference to the player script.
         pB = GameObject.FindWithTag("Player").GetComponent<PlayerBehavior>();
-
-        // Set reference to script.
-        tP = GameObject.Find("TempUIHolder").GetComponent<TempPlayerScoreAndHealth>();
 
         // Destroy the player attack after a set amount of time so it does not exist for too long.
         Destroy(this.gameObject, 4.5f);
@@ -33,7 +27,7 @@ public class PlayerAttack : MonoBehaviour
             // If the arrow hits an enemy, deal damage to the enemy, change the player's score, and destroy the arrow.
             // Right before destroying, call player weapon destroyed function to allow the player to attack again.
             hit.GetComponent<EnemyScript>().EnemyTakeDamage(damageDealt);
-            tP.ChangeScore(enemyHitScore);
+            pB.ChangeScore(enemyHitScore);
             pB.WeaponDestroyed();
             Destroy(this.gameObject);
         }
