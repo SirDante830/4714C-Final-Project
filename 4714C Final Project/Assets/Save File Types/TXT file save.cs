@@ -67,8 +67,4 @@ public class TXTfilesave : MonoBehaviour
         
     }
 
-    void createText()
-    {
-        string path = Application.dataPath + "log.txt";
-    }
 }

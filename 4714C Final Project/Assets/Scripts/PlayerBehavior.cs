@@ -105,6 +105,11 @@ public class PlayerBehavior : MonoBehaviour
             TakeDamage();
            /* StartCoroutine(ConstantDamage());*/
         }
+        else if (collision.CompareTag("Projectile"))
+        {
+            TakeDamage();
+            Destroy(collision.gameObject);
+        }
     }
     
     // Temporary coroutine that changes the player's color when they collide with an enemy.

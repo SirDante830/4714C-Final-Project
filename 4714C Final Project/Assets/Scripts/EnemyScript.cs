@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using static CreateMapandType;
 
@@ -56,14 +57,10 @@ public class EnemyScript : MonoBehaviour
                 break;
         }
     }
-    private void OnTriggerEnter2D(Collider2D Hit)
+    public void EnemyTakeDamage(int damage)
     {
-        if (Hit.CompareTag("Arrow"))
-        {
-            Debug.Log("hit");
-            EnemyHP -= 50;
-        }
-        if(EnemyHP <= 0)
+        EnemyHP -= damage;
+        if (EnemyHP <= 0)
         {
             Debug.Log("Destroyed");
             Destroy(enemy);

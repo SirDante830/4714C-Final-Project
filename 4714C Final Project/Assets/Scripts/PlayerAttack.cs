@@ -8,7 +8,7 @@ public class PlayerAttack : MonoBehaviour
     //public GameObject explosionAnimation; // This needs to be assigned in the inspector of the player weapon. (Not doing).
     private PlayerBehavior pB; // This is a reference to the player behavior script which is used in different parts of the script.
     private int enemyHitScore = 10; // This is the amount of score the player is given when they hit an enemy.
-    //private int damageDealt = 1; // This is the amount of damage the player's weapon deals to enemies.
+    private int damageDealt = 25; // This is the amount of damage the player's weapon deals to enemies.
 
     // Reference to UI script.
     private TempPlayerScoreAndHealth tP;
@@ -32,10 +32,13 @@ public class PlayerAttack : MonoBehaviour
         {
             // If the arrow hits an enemy, deal damage to the enemy, change the player's score, and destroy the arrow.
             // Right before destroying, call player weapon destroyed function to allow the player to attack again.
-            //hit.GetComponent<EnemyBehavior>().EnemyTakeDamage(damageDealt);
+            hit.GetComponent<EnemyScript>().EnemyTakeDamage(damageDealt);
             tP.ChangeScore(enemyHitScore);
             pB.WeaponDestroyed();
             Destroy(this.gameObject);
+        }
+        else if (hit.CompareTag("Projectile")){
+            Destroy(hit.gameObject);
         }
     }
 }
