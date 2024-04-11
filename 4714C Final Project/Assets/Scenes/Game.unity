@@ -956,6 +956,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2105729662}
   - component: {fileID: 2105729661}
+  - component: {fileID: 2105729663}
   m_Layer: 0
   m_Name: TempUIHolder
   m_TagString: Untagged
@@ -992,6 +993,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2105729663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105729660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0012981909eeb4f9de673511c75351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstaclesToSpawn: 10
+  mapSize: 10
+  levelSelect: 0
+  obstaclePrefab: {fileID: 0}
+  grassObs: {fileID: 2548749772093870057, guid: c316f67170ed85a4999ce81ba879e6fe, type: 3}
+  desertObs: {fileID: 963171786855317182, guid: d171d10c0764f0c44bb4890a4d52785c, type: 3}
+  snowObs: {fileID: 6410343596272955346, guid: 0a8a0b55888832e48b1d0b2018b30ae4, type: 3}
 --- !u!1001 &1163465539253009558
 PrefabInstance:
   m_ObjectHideFlags: 0
