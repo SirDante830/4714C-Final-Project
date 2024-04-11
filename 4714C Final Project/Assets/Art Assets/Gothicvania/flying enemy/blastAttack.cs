@@ -19,6 +19,9 @@ public class blastAttack : MonoBehaviour
 
 
     float[] rotations;
+
+    // Projectile housing object.
+    private GameObject housing;
     void Start()
     {
         timer = cooldown;
@@ -31,6 +34,9 @@ public class blastAttack : MonoBehaviour
              */
             DistributedRotations();
         }
+
+        // Create empty housing object for projectiles.
+        housing = new GameObject("ProjectileHousing");
     }
 
     // Update is called once per frame
@@ -78,6 +84,7 @@ public class blastAttack : MonoBehaviour
 
         // Spawn Bullets
         GameObject[] spawnedBullets = new GameObject[numberOfBullets];
+        
         for (int i = 0; i < numberOfBullets; i++)
         {
             spawnedBullets[i] = Instantiate(bulletResource, transform);
@@ -87,6 +94,13 @@ public class blastAttack : MonoBehaviour
             b.speed = bulletSpeed;
             b.velocity = bulletVelocity;
         }
+
+        // For each bullet in the spawned bullets array, set its parent to the housing object.
+        foreach (GameObject projectile in spawnedBullets)
+        {
+            projectile.GetComponent<Transform>().SetParent(housing.GetComponent<Transform>());
+        }
+
         return spawnedBullets;
     }
 }
