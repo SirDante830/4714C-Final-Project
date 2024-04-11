@@ -7,7 +7,7 @@ public class PlayerBehavior : MonoBehaviour
 {
     // Variables related to player movement.
     private Rigidbody2D rb2d;
-    private float playerSpeed = 9.0f;
+    private float playerSpeed = 7.0f;
     private float horizontalMovement; // Used for both movement and sprite change.
     private float verticalMovement; // Used for both movement and sprite change.
 
@@ -15,14 +15,38 @@ public class PlayerBehavior : MonoBehaviour
     private float inputAmount = 0.02f;
     private Animator playerAnimator;
 
+    // Variables used for player class and color.
     private Color classColor;
     private string className;
 
+    // Reference to UI script.
+    private TempPlayerScoreAndHealth tP;
+
+    // Variables used for weapon behavior.
+    private Transform playerTransform;
+    private Vector2 lastFacingDirection = Vector2.right;
+    private float playerAttackCooldown = 1.1f;
+    private float lastAttackTime;
+    public GameObject playerWeapon;
+    private float playerAttackSpeed = 10.5f;
+
+    // Create a list of the various classes that the player can be.
+    [HideInInspector] public List<string> playerClassName = new List<string>()
+    {
+        "archer",
+        "wizard",
+        "blueberry"
+    };
+
     void Start()
     {
+        // Set reference to script.
+        tP = GameObject.Find("TempUIHolder").GetComponent<TempPlayerScoreAndHealth>();
+
         // Set references to player components.
         rb2d = GetComponent<Rigidbody2D>(); // Set rigidbody reference.
         playerAnimator = GetComponent<Animator>(); // Set animator reference.
+        playerTransform = transform; // Set transform reference.
 
         // Assign movement axis references.
         horizontalMovement = Input.GetAxis("Horizontal");
@@ -50,28 +74,36 @@ public class PlayerBehavior : MonoBehaviour
         // Assign movement axis references.
         horizontalMovement = Input.GetAxis("Horizontal");
         verticalMovement = Input.GetAxis("Vertical");
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            SpawnPlayerWeapon();
+        }
     }
 
     void PlayerMovement()
     {
         // Change rigidbody velocity (allow player to move) and do it in fixed update for accurate physics interactions.
-        //rb2d.velocity = new Vector2(horizontalMovement * playerSpeed, verticalMovement * playerSpeed);
-
-        Vector3 temp = new Vector3(horizontalMovement, verticalMovement, 0f);
-        temp = temp.normalized * Time.fixedDeltaTime * playerSpeed;
-
-        transform.position += temp;
+        rb2d.velocity = new Vector2(horizontalMovement * playerSpeed, verticalMovement * playerSpeed);
 
         // Run function that changes the player's sprite based on movement.
         UpdateSpriteAnimation();
+
+        // Update the last facing direction whenever movement occurs.
+        if (Mathf.Abs(horizontalMovement) > 0.05f || Mathf.Abs(verticalMovement) > 0.05f)
+        {
+            lastFacingDirection = new Vector2(horizontalMovement, verticalMovement).normalized;
+        }
     }
     
     void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Used");
         // If player collides with tag Enemy, then run the take damage function.
         if (collision.CompareTag("Enemy"))
         {
             TakeDamage();
+           /* StartCoroutine(ConstantDamage());*/
         }
     }
     
@@ -87,6 +119,7 @@ public class PlayerBehavior : MonoBehaviour
     // Function that handles the damage the player takes. 
     public void TakeDamage()
     {
+        tP.ChangeLives(-1);
         StartCoroutine(ColorChange()); // Run change color coroutine
         Debug.Log("Damage Taken"); // Send a message in the console.
     }
@@ -125,19 +158,16 @@ public class PlayerBehavior : MonoBehaviour
         playerAnimator.SetBool("moveUp", movingUp);
         playerAnimator.SetBool("moveDown", movingDown);
     }
+   /* IEnumerator ConstantDamage()
+    {
+        TakeDamage();
+        yield return new WaitForSeconds(1);
+    }*/
 
     // Function that sets the player's class.
     // Will probably change as I think player will have the ability to choose their class.
     void PlayerClass()
     {
-        // Create a list of the various classes that the player can be.
-        List<string> playerClassName = new List<string>()
-            { 
-                "archer", 
-                "wizard", 
-                "blueberry" 
-            };
-
         // Create a random number that uses the length of the list as the max value.
         float randomNum = Random.Range(0, playerClassName.Count);
 
@@ -154,17 +184,17 @@ public class PlayerBehavior : MonoBehaviour
             case "archer":
                 // Player is archer, so use base color and make them quick.
                 classColor = Color.white;
-                playerSpeed = 10.0f;
+                playerSpeed = 7.0f;
                 break;
             case "wizard":
                 // Player is wizard, so make them cyan since it stands out and slow them down.
                 classColor = Color.cyan;
-                playerSpeed = 7.5f;
+                playerSpeed = 5.5f;
                 break;
             case "blueberry":
                 // Player is blueberry so make them blue and zoomin.
                 classColor = Color.blue;
-                playerSpeed = 11.5f;
+                playerSpeed = 8.5f;
                 break;
             default:
                 // If none of the classes above, use base color and base speed.
@@ -174,5 +204,43 @@ public class PlayerBehavior : MonoBehaviour
         
         // Once classColor is set, apply it.
         this.GetComponent<Renderer>().material.color = classColor;
+    }
+
+    void SpawnPlayerWeapon()
+    {
+        // Check to see if enough time has passed since the last weapon spawn to spawn another.
+        if (Time.time - lastAttackTime < playerAttackCooldown)
+        {
+            return; // Not enough time has passed, so exit the function.
+        }
+
+        // Spawn the attack at the player's position and give it a variable name.
+        GameObject playerAttack = Instantiate(playerWeapon, playerTransform.position, Quaternion.identity);
+        // Get the rigidbody of the player's attack.
+        Rigidbody2D playerAttackRb = playerAttack.GetComponent<Rigidbody2D>();
+
+        // As long as the playerAttack's rigidbody exits (does not equal null), run code below.
+        if (playerAttackRb != null)
+        {
+            // Set the direction the attack moves in the direction the player is facing.
+            playerAttackRb.velocity = lastFacingDirection * playerAttackSpeed;
+
+            // Calculate the angle based on the movement direction of the player.
+            // Once calculated, set the player's attack to that rotation.
+            float angle = Mathf.Atan2(lastFacingDirection.x, -lastFacingDirection.y) * Mathf.Rad2Deg;
+            playerAttack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+        //else
+        //{
+        //    Debug.LogWarning("Rigidbody2D not found on player attack."); // Debug here in case issue occurs.
+        //}
+
+        lastAttackTime = Time.time; // Begin attack cooldown.       
+    }
+
+    // Function is called when the weapon is destroyed. This then resets the cooldown timer, allowing the player to attack again.
+    public void WeaponDestroyed()
+    {
+        lastAttackTime = Time.time - playerAttackCooldown;
     }
 }
