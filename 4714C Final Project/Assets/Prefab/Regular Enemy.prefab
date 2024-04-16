@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3435049815056428691}
   - component: {fileID: 1573275750397630512}
   - component: {fileID: 3894334957871800075}
-  - component: {fileID: 5551400987068370551}
+  - component: {fileID: 1802933515338162921}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Regular Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1573275750397630512
 SpriteRenderer:
@@ -121,7 +121,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.011511803, y: -0.023025274}
   m_Size: {x: 1.5295811, y: 2.3684058}
   m_Direction: 0
---- !u!114 &5551400987068370551
+--- !u!114 &1802933515338162921
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,9 +130,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8811586147332549336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b76a8d1f74175b4aaf8d872d135d709, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c68f13d280bd264fadfd320737b26b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 4164717708071938934, guid: 4578c7566d1bf9d43923c5564077df47, type: 3}
+  enemy: {fileID: 8811586147332549336}
+  ChosenEnemy: 0
+  rangeDistance: 6
+  player: {fileID: 0}
   speed: 1
   ranged: 0
+  FlyingDemonSprite: {fileID: 0}
