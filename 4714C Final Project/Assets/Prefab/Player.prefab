@@ -163,6 +163,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerWeapon: {fileID: 2954329687501954823, guid: e31199de369f8cf418f1d5e7d370a38f, type: 3}
+  playerMelee: {fileID: 0}
+  playerBomb: {fileID: 6228198257917366365, guid: 3f73b9470b5be3941bd7e1074424330e, type: 3}
+  playerClassName:
+  - archer
+  - wizard
+  - blueberry
+  livesText: {fileID: 0}
+  scoreText: {fileID: 0}
+  gameOverDisplay: {fileID: 0}
 --- !u!95 &9051289877304096162
 Animator:
   serializedVersion: 5

@@ -28,6 +28,8 @@ public class PlayerBehavior : MonoBehaviour
     private float playerAttackCooldown = 1.1f;
     private float lastAttackTime;
     public GameObject playerWeapon;
+    public GameObject playerMelee;
+    public GameObject playerBomb;
     private float playerAttackSpeed = 10.5f;
 
     // Create a list of the various classes that the player can be.
@@ -78,6 +80,10 @@ public class PlayerBehavior : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             SpawnPlayerWeapon();
+        }
+        else if (Input.GetKey(KeyCode.Z))
+        {
+
         }
     }
 
@@ -241,6 +247,17 @@ public class PlayerBehavior : MonoBehaviour
         //}
 
         lastAttackTime = Time.time; // Begin attack cooldown.       
+    }
+    void PlayerBomb()
+    {
+        if (Time.time - lastAttackTime < playerAttackCooldown)
+        {
+            return; // Not enough time has passed, so exit the function.
+        }
+        // Spawn the attack at the player's position and give it a variable name.
+        GameObject playerBomb = Instantiate(playerWeapon, playerTransform.position, Quaternion.identity);
+        // Get the rigidbody of the player's attack.
+        Rigidbody2D playerBombRb = playerBomb.GetComponent<Rigidbody2D>();
     }
 
     // Function is called when the weapon is destroyed. This then resets the cooldown timer, allowing the player to attack again.
