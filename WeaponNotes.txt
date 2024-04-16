@@ -1,0 +1,15 @@
+Player Weapon suggestions:
+
+
+Player bomb:
+
+player throws bomb and only detonates within a certain radius.
+
+
+safely put bomb in one spot statically and have it explode within 3 seconds
+
+
+have bomb land and explode within 3 seconds as it is landing
+
+
+Player 	
