@@ -126,9 +126,13 @@ public class PlayerBehavior : MonoBehaviour
         horizontalMovement = Input.GetAxis("Horizontal");
         verticalMovement = Input.GetAxis("Vertical");
 
-        if (Input.GetKey(KeyCode.Space) ||Input.GetKey(KeyCode.Z))
+        if (Input.GetKey(KeyCode.Space))
         {
             SpawnPlayerWeapon();
+        }
+        else if (Input.GetKey(KeyCode.Z))
+        {
+            Bomb();
         }
     }
 
@@ -289,17 +293,37 @@ public class PlayerBehavior : MonoBehaviour
 
         lastAttackTime = Time.time; // Begin attack cooldown.       
     }
-    /*void PlayerBomb()
+    void Bomb()
     {
+        // Check to see if enough time has passed since the last weapon spawn to spawn another.
         if (Time.time - lastAttackTime < playerAttackCooldown)
         {
             return; // Not enough time has passed, so exit the function.
         }
+
         // Spawn the attack at the player's position and give it a variable name.
-        GameObject playerBomb = Instantiate(playerWeapon, playerTransform.position, Quaternion.identity);
+        GameObject playerAttack = Instantiate(playerBomb, playerTransform.position, Quaternion.identity);
         // Get the rigidbody of the player's attack.
-        Rigidbody2D playerBombRb = playerBomb.GetComponent<Rigidbody2D>();
-    }*/
+        Rigidbody2D playerAttackRb = playerAttack.GetComponent<Rigidbody2D>();
+
+        // As long as the playerAttack's rigidbody exits (does not equal null), run code below.
+        if (playerAttackRb != null)
+        {
+            // Set the direction the attack moves in the direction the player is facing.
+            playerAttackRb.velocity = lastFacingDirection * playerAttackSpeed;
+
+            // Calculate the angle based on the movement direction of the player.
+            // Once calculated, set the player's attack to that rotation.
+            float angle = Mathf.Atan2(lastFacingDirection.x, -lastFacingDirection.y) * Mathf.Rad2Deg;
+            playerAttack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+        else
+        {
+            Debug.LogWarning("Rigidbody2D not found on player attack."); // Debug here in case issue occurs.
+        }
+
+        lastAttackTime = Time.time; // Begin attack cooldown.      
+    }
 
     // Function is called when the weapon is destroyed. This then resets the cooldown timer, allowing the player to attack again.
     public void WeaponDestroyed()

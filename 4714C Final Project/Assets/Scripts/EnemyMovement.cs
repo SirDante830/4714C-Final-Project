@@ -59,7 +59,11 @@ public class EnemyMovement : MonoBehaviour
                direction = Vector3.zero;
                 }
         }
-        FlyingDemonSprite.SetFloat("Horizontal", direction.x);
-        FlyingDemonSprite.SetFloat("Speed", direction.sqrMagnitude);
+        //if(FlyingDemonSprite != null)
+        //{
+            FlyingDemonSprite.SetFloat("Horizontal", direction.x);
+            FlyingDemonSprite.SetFloat("Speed", direction.sqrMagnitude);
+        //}
+        
     }
 }
