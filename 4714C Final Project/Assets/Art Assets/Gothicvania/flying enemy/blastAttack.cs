@@ -71,7 +71,7 @@ public class blastAttack : MonoBehaviour
             var fractionOfDifference = fraction * difference;
             rotations[i] = fractionOfDifference + minRotation; // We add minRotation to undo Difference
         }
-        foreach (var r in rotations) print(r);
+        //foreach (var r in rotations) print(r);
         return rotations;
     }
     public GameObject[] SpawnBullets()
