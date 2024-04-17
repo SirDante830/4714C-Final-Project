@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7154717711661716671}
   m_Layer: 0
   m_Name: Regular Projectile
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,3 +162,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4164717708071938934, guid: 4578c7566d1bf9d43923c5564077df47, type: 3}
+  projectileSpeed: 1
