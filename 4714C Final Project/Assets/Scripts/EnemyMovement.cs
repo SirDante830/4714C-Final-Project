@@ -6,7 +6,9 @@ public class EnemyMovement : EnemyScript
 {
     private Vector3 direction;
     private Vector3 velocity;
-
+    public GameObject projectile;
+    private float timer;
+    public float cooldown = 3f;
     //if you want an enemy to shoot up close or far away etc. Default is 6
     public float rangeDistance = 6;
     //assign the player to this variable
@@ -21,7 +23,8 @@ public class EnemyMovement : EnemyScript
 
      void Start()
     {
-      player = GameObject.FindGameObjectWithTag("Player");   
+      player = GameObject.FindGameObjectWithTag("Player");
+      timer = cooldown;
     }
     void Update()
     {
@@ -38,6 +41,12 @@ public class EnemyMovement : EnemyScript
                 this.transform.position = this.transform.position + velocity;
 
             }
+            if(timer <= 0)
+            {
+                Instantiate(projectile, transform.position, transform.rotation);
+                timer = cooldown;
+            }
+            timer -= Time.deltaTime;
           /*  else if(direction.magnitude < rangeDistance)// out of range
             {
                 direction = Vector3.zero;
@@ -48,16 +57,8 @@ public class EnemyMovement : EnemyScript
         {
             //moves enemy towards player
           //  direction = Vector3.zero;
-            
-            if(direction.magnitude > 5f)// default range
-            {
                 this.transform.position = this.transform.position + velocity;
-                
-            }
-            if(direction.magnitude < 5f || direction.magnitude > 20f)
-                {
-               direction = Vector3.zero;
-                }
+
         }
         FlyingDemonSprite.SetFloat("Horizontal", direction.x);
         FlyingDemonSprite.SetFloat("Speed", direction.sqrMagnitude);
