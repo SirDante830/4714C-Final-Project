@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
     private int enemyHitScore = 10; // This is the amount of score the player is given when they hit an enemy.
     private int damageDealt = 25; // This is the amount of damage the player's weapon deals to enemies.
     public Collider2D trigger;
+    public SphereCollider SphereCollider;
 
     void Start()
     {
