@@ -23,6 +23,13 @@ public class MainMenu : MonoBehaviour
     private int desertMinObstaclesAmount = 25;
     private int desertMaxObstaclesAmount = 40;
 
+
+    private void Start()
+    {
+        // Limit frame rate to the refresh rate of the monitor.
+        QualitySettings.vSyncCount = 1;
+    }
+
     // Load the game scene with a snow biome.
     public void PlaySnowBiome()
     {
