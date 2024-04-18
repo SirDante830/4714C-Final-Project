@@ -9,6 +9,7 @@ public class PlayerAttack : MonoBehaviour
     private PlayerBehavior pB; // This is a reference to the player behavior script which is used in different parts of the script.
     private int enemyHitScore = 10; // This is the amount of score the player is given when they hit an enemy.
     private int damageDealt = 25; // This is the amount of damage the player's weapon deals to enemies.
+    public Collider2D trigger;
 
     void Start()
     {
@@ -16,7 +17,16 @@ public class PlayerAttack : MonoBehaviour
         pB = GameObject.FindWithTag("Player").GetComponent<PlayerBehavior>();
 
         // Destroy the player attack after a set amount of time so it does not exist for too long.
-        Destroy(this.gameObject, 4.5f);
+        if (this.CompareTag("Arrow"))
+        {
+            Destroy(this.gameObject, 4.5f);
+        }
+        else if (this.CompareTag("Bomb"))
+        {
+            trigger.isTrigger = true;
+            Destroy(this.gameObject, 3.5f);
+        }
+        
     }
 
     // When the weapon collides with something, check the tag to see what it is. 
@@ -27,6 +37,7 @@ public class PlayerAttack : MonoBehaviour
             // If the arrow hits an enemy, deal damage to the enemy, change the player's score, and destroy the arrow.
             // Right before destroying, call player weapon destroyed function to allow the player to attack again.
             hit.GetComponent<EnemyScript>().EnemyTakeDamage(damageDealt);
+            Debug.Log("Bomb hit");
             pB.ChangeScore(enemyHitScore);
             pB.WeaponDestroyed();
             Destroy(this.gameObject);
