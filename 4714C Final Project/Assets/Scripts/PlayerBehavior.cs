@@ -308,6 +308,13 @@ public class PlayerBehavior : MonoBehaviour
         {
             _score = 0;
         }
+
+        //Slowly enhance your character every 10 hits
+        if(_score % 100 == 0)
+        {
+            maxLives++;
+            _lives++;
+        }
     }
 
     // Function to change score.

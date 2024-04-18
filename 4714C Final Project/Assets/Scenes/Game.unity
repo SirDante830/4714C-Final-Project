@@ -246,6 +246,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1836f9e4e2102934bb6db599ff97898b, type: 3}
+--- !u!1001 &589528867
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.108921
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552697298245729907, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_Name
+      value: Ranger Enemy (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
 --- !u!1 &631488222
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,6 +657,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1135164735
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552697298245729907, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_Name
+      value: Ranger Enemy (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
 --- !u!1 &1141360010
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,7 +883,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 625.7001, y: 479.66016}
+  m_AnchoredPosition: {x: 625.7001, y: 445}
   m_SizeDelta: {x: 497.207, y: 86.797}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1263496239
@@ -1084,7 +1206,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -663.70013, y: 479.66016}
+  m_AnchoredPosition: {x: -663.70013, y: 447}
   m_SizeDelta: {x: 409.09, y: 80.056}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1321274966
@@ -1268,6 +1390,128 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1530535984
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 21.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552697298245729907, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_Name
+      value: Ranger Enemy (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+--- !u!1001 &1556213355
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685282012841067538, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552697298245729907, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
+      propertyPath: m_Name
+      value: Ranger Enemy (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5daba8c6b6f218847bac904fa6c257e7, type: 3}
 --- !u!1 &2129498343
 GameObject:
   m_ObjectHideFlags: 0
