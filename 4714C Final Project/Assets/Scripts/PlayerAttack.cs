@@ -24,7 +24,7 @@ public class PlayerAttack : MonoBehaviour
         }
         else if (this.CompareTag("Bomb"))
         {
-            trigger.isTrigger = true;
+            /*trigger.isTrigger = true;*/
             Destroy(this.gameObject, 3.5f);
         }
         
