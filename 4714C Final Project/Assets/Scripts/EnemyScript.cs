@@ -12,7 +12,7 @@ public class EnemyScript : MonoBehaviour
     private Color classColor;
     private string className;
     private string EnemySelection;
-    [SerializeField] private GameObject enemy;
+    //[SerializeField] private GameObject enemy;
     public enum EnemyTypes
     {
         Crawler,
@@ -21,7 +21,7 @@ public class EnemyScript : MonoBehaviour
     }
     private EnemyTypes EnemySelect;
     public EnemyTypes ChosenEnemy;
-    // Start is called before the first frame update
+
     void Start()
     {
         ChosenEnemy = EnemySelect;
@@ -29,11 +29,6 @@ public class EnemyScript : MonoBehaviour
         EnemyClass(EnemySelection);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     void EnemyClass(string EnemySelection)
     {
         switch (EnemySelection)
@@ -55,15 +50,18 @@ public class EnemyScript : MonoBehaviour
                 break;
             default:
                 break;
+      
         }
     }
     public void EnemyTakeDamage(int damage)
     {
         EnemyHP -= damage;
+
+        // If enemy has no more hp, destroy the object.
         if (EnemyHP <= 0)
         {
-            Debug.Log("Destroyed");
-            Destroy(enemy);
+            //Debug.Log("Destroyed");
+            Destroy(this.gameObject);
         }
     }
 }

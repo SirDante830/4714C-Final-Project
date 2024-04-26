@@ -41,15 +41,15 @@ public class GameManager : MonoBehaviour
             }
         }
         // If UnityException is caught, default to loading the main menu and send a message.
-        catch (UnityException exception)
+        catch (UnityException)
         {
             SceneManager.LoadScene("MainMenu");
-            Debug.Log("Couldn't load '" + sceneName + "'. " + exception.Message);
+            //Debug.Log("Couldn't load '" + sceneName + "'. " + exception.Message);
         }
         // Say scene loaded whether the desired scene or default scene is loaded.
         finally
         {
-            Debug.Log("Scene loaded.");
+            //Debug.Log("Scene loaded.");
         }
     }
 

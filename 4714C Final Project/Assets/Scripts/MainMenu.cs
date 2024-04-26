@@ -33,6 +33,7 @@ public class MainMenu : MonoBehaviour
     // Load the game scene with a snow biome.
     public void PlaySnowBiome()
     {
+        // Set chosen level, size of the map, and number of obstacles.
         CreateMapandType.chosenLevel = CreateMapandType.levelTypes.Snow;
         CreateMapandType.mapSize = Random.Range(snowMinMapSize, snowMaxMapSize);
         CreateMapandType.obstaclesToSpawn = Random.Range(snowMinObstaclesAmount, snowMaxObstaclesAmount);
@@ -42,6 +43,7 @@ public class MainMenu : MonoBehaviour
     // Load the game scene with a grassland biome.
     public void PlayGrasslandBiome()
     {
+        // Set chosen level, size of the map, and number of obstacles.
         CreateMapandType.chosenLevel = CreateMapandType.levelTypes.Grassland;
         CreateMapandType.mapSize = Random.Range(grasslandMinMapSize, grasslandMaxMapSize);
         CreateMapandType.obstaclesToSpawn = Random.Range(grasslandMinObstaclesAmount, grasslandMaxObstaclesAmount);
@@ -51,6 +53,7 @@ public class MainMenu : MonoBehaviour
     // Load the game scene with a desert biome.
     public void PlayDesertBiome()
     {
+        // Set chosen level, size of the map, and number of obstacles.
         CreateMapandType.chosenLevel = CreateMapandType.levelTypes.Desert;
         CreateMapandType.mapSize = Random.Range(desertMinMapSize, desertMaxMapSize);
         CreateMapandType.obstaclesToSpawn = Random.Range(desertMinObstaclesAmount, desertMaxObstaclesAmount);

@@ -31,7 +31,8 @@ public class PlayerAttack : MonoBehaviour
             pB.WeaponDestroyed();
             Destroy(this.gameObject);
         }
-        else if (hit.CompareTag("Projectile")){
+        else if (hit.CompareTag("Projectile"))
+        {
             Destroy(hit.gameObject);
         }
     }

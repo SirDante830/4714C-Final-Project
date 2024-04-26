@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class EnemyShoot : MonoBehaviour
 {
-    private PlayerBehavior pB;
     public GameObject player;
     private Vector3 direction;
     public float projectileSpeed = 1f;
+
+    // Projectile rigidbody
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,10 +26,10 @@ public class EnemyShoot : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
-        {
-            pB.Lives--;
-        }
-       // Destroy(gameObject);
+       // if(collision.CompareTag("Player"))
+       // {
+       //     collision.GetComponent<PlayerBehavior>().ChangeLives(-1);
+       // }
+       //// Destroy(gameObject);
     }
 }

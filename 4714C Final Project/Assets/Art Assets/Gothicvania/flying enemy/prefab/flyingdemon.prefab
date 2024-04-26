@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3666767720259415461}
   - component: {fileID: 3666767720259415463}
   - component: {fileID: 5313375156746344001}
+  - component: {fileID: 4463102728027238578}
   m_Layer: 0
   m_Name: flyingdemon
   m_TagString: Enemy
@@ -156,7 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd6d60002eff1444ae564889ffebba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 3666767720259415456}
   ChosenEnemy: 1
 --- !u!114 &5313375156746344001
 MonoBehaviour:
@@ -178,3 +178,23 @@ MonoBehaviour:
   cooldown: 5
   bulletSpeed: 3
   bulletVelocity: {x: 1, y: 1}
+--- !u!114 &4463102728027238578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3666767720259415456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c68f13d280bd264fadfd320737b26b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChosenEnemy: 0
+  projectile: {fileID: 8512201400614395476, guid: 1c8c8650c646ab744b97e1d7c77620a6, type: 3}
+  cooldown: 3
+  rangeDistance: 6
+  player: {fileID: 4164717708071938934, guid: 4578c7566d1bf9d43923c5564077df47, type: 3}
+  speed: 1
+  ranged: 1
+  FlyingDemonSprite: {fileID: 3666767720259415460}

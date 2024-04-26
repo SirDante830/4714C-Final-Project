@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9088489739709387686}
   - component: {fileID: 3935822891426832623}
   - component: {fileID: 1945438335950517038}
+  - component: {fileID: 7969214446408862601}
   m_Layer: 0
   m_Name: Ranger Enemy
   m_TagString: Enemy
@@ -134,7 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c68f13d280bd264fadfd320737b26b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 2552697298245729907}
   ChosenEnemy: 2
   projectile: {fileID: 6477440444058270555, guid: c836264beb3e8224bb1a366305f45c3d, type: 3}
   cooldown: 3
@@ -156,3 +156,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4164717708071938934, guid: 4578c7566d1bf9d43923c5564077df47, type: 3}
+  projectileSpeed: 1
+--- !u!114 &7969214446408862601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2552697298245729907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd6d60002eff1444ae564889ffebba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChosenEnemy: 0

@@ -1660,10 +1660,6 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4390203494285670986, guid: 4578c7566d1bf9d43923c5564077df47, type: 3}
-      propertyPath: gameOver
-      value: 
-      objectReference: {fileID: 1141360010}
-    - target: {fileID: 4390203494285670986, guid: 4578c7566d1bf9d43923c5564077df47, type: 3}
       propertyPath: livesText
       value: 
       objectReference: {fileID: 1321274966}

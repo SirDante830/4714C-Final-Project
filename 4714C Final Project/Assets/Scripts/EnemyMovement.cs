@@ -43,7 +43,12 @@ public class EnemyMovement : EnemyScript
             }
             if(timer <= 0)
             {
-                Instantiate(projectile, transform.position, transform.rotation);
+                // Only spawn a projectile if the object is not the flying demon has the flying demon has their own projetile script.
+                if (this.gameObject.name != "flyingdemon")
+                {
+                    Instantiate(projectile, transform.position, transform.rotation);
+                }
+
                 timer = cooldown;
             }
             timer -= Time.deltaTime;
@@ -60,7 +65,12 @@ public class EnemyMovement : EnemyScript
                 this.transform.position = this.transform.position + velocity;
 
         }
-        FlyingDemonSprite.SetFloat("Horizontal", direction.x);
-        FlyingDemonSprite.SetFloat("Speed", direction.sqrMagnitude);
+
+        // Check to make sure that the sprite reference exists before setting the float to ensure there is no error.
+        if (FlyingDemonSprite != null)
+        {
+            FlyingDemonSprite.SetFloat("Horizontal", direction.x);
+            FlyingDemonSprite.SetFloat("Speed", direction.sqrMagnitude);
+        }
     }
 }

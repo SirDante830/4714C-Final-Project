@@ -338,6 +338,12 @@ public class PlayerBehavior : MonoBehaviour
         {
             // Adjust the lives by the change amount.
             Lives += livesChange;
+            
+            // Run a check to make sure the max or minimum of lives and score are not hit. *Score does not have a max.
+            MinAndMaxChecks();
+
+            // Set the UI so it changes when the lives change.
+            SetUI();
 
             // After changing, if the lives are at or below 0, throw an exception made in the OutOfLivesException class.
             if (_lives <= 0)
@@ -346,17 +352,11 @@ public class PlayerBehavior : MonoBehaviour
             }
         }
         // If an OutOfLiveException is caught, begin the zero lives remaining coroutine that ends the game and debug that the player is out of lives.
-        catch (OutOfLivesException exception)
+        catch (OutOfLivesException)
         {
             StartCoroutine(ZeroLivesRemaining());
-            Debug.Log("Can't continue because there are no more lives remaining!" + exception);
+            //Debug.Log("Can't continue because there are no more lives remaining!" + exception);
         }
-
-        // Run a check to make sure the max or minimum of lives and score are not hit. *Score does not have a max.
-        MinAndMaxChecks();
-
-        // Set the UI so it changes when the lives change.
-        SetUI();
     }
 
     // Function to set UI.
