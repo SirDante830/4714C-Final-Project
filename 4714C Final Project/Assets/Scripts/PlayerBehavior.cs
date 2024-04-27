@@ -84,6 +84,10 @@ public class PlayerBehavior : MonoBehaviour
     public delegate void GameOverEvent();
     public event GameOverEvent gameIsOver;
 
+    // When the player gets hit, they have a small invincibility time, and this bool tracks when they are or are not invincible.
+    private bool invincible = false;
+    private float invincibleTime = 1.2f; // Time player is invincible
+
     void Start()
     {
         // Set references to player components.
@@ -161,8 +165,13 @@ public class PlayerBehavior : MonoBehaviour
     // Function that handles the damage the player takes. 
     public void TakeDamage()
     {
-        ChangeLives(livesLostOnHit);
-        StartCoroutine(ColorChange()); // Run change color coroutine
+        // If the player is not invincible, take away a life, flash red to indicate damage taken, and set them to invincible for a brief time.
+        if (!invincible)
+        {
+            ChangeLives(livesLostOnHit);
+            StartCoroutine(ColorChange()); // Run change color coroutine
+            StartCoroutine(SetInvincible());
+        }
     }
 
     // Updates the sprite animation based on the direction the player is moving in.
@@ -212,7 +221,7 @@ public class PlayerBehavior : MonoBehaviour
         className = playerClassName[(int) randomNum];
         
         // Display the player's class in the console window.
-        Debug.Log($"Your class is: {className}");
+        //Debug.Log($"Your class is: {className}");
 
         // Use a switch statement to change the player's color and speed based on their class.
         switch (className)
@@ -356,8 +365,6 @@ public class PlayerBehavior : MonoBehaviour
     // Function to set UI.
     void SetUI()
     {
-        Debug.Log("Run " + Lives);
-        Debug.Log("Run2 " + _lives);
         // Set the livesText to the text in "" + the current lives variable value.
         livesText.text = "Lives " + _lives;
 
@@ -385,5 +392,13 @@ public class PlayerBehavior : MonoBehaviour
         {
 
         }
+    }
+
+    // When player gets hit, set them to invincible for a brief time frame before allowing them to take damaage again.
+    private IEnumerator SetInvincible()
+    {
+        invincible = true;
+        yield return new WaitForSeconds(invincibleTime);
+        invincible = false;
     }
 }

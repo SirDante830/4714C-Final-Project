@@ -25,9 +25,8 @@ public class GameManager : MonoBehaviour
         // Subscribe to the player game over event.
         pB.gameIsOver += HandleGameOver;
 
-        // Set the currentscene the playeris in to the one they are actively in.
+        // Set the currentscene the player is in to the one they are actively in.
         currentScene = SceneManager.GetActiveScene().name;
-        Debug.Log(currentScene);
 
         // Invoke the spawning enemies function and repeat it every 15 seconds.
         InvokeRepeating("SpawnEnemies", 2f, 15f);
