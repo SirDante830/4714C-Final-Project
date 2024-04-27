@@ -322,6 +322,10 @@ public class PlayerBehavior : MonoBehaviour
             Debug.Log($"Bomb: {bombs}");
             if(bombs == 0)
             {
+                if (Time.time - lastAttackTime < bombCoolDown)
+                {
+                    return; // Not enough time has passed, so exit the function.
+                }
                 //wait 5 seconds after no bombs, then add a bomb every 3 or so seconds
                 StartCoroutine(TimeCoroutine());
 
