@@ -15,17 +15,18 @@ public class EnemyMovement : EnemyScript
     public GameObject player;
 
     //you can adjust the speed of the enemy to make speedy or slow enemies
-    public float speed = 1f;
+    public static float speed = 1f;
 
     //determines if enemy is ranged or not
     public bool ranged = false;
     public Animator FlyingDemonSprite;
 
      void Start()
-    {
-      player = GameObject.FindGameObjectWithTag("Player");
-      timer = cooldown;
-    }
+     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        timer = cooldown;
+     }
+
     void Update()
     {
         
@@ -34,16 +35,15 @@ public class EnemyMovement : EnemyScript
         //the velocity that the enemy moves towards player
         velocity = direction.normalized * speed * Time.deltaTime;
         //if enemy is ranged, it will stay a distance away from the player to shoot
-        if(ranged)
+        if(ranged && direction.magnitude > rangeDistance)
         {
-            if(direction.magnitude > rangeDistance)// while in range
-            {
-                this.transform.position = this.transform.position + velocity;
+            // Since the enemy is a certain range away from the player, move towards the player until too close.
+            this.transform.position = this.transform.position + velocity;
 
-            }
+            // If the timer is at or less than 0, spawn a projectile and restart the countdown.
             if(timer <= 0)
             {
-                // Only spawn a projectile if the object is not the flying demon has the flying demon has their own projetile script.
+                // Only spawn a projectile if the object is not the flying demon as the flying demon has their own projetile script.
                 if (this.gameObject.name != "flyingdemon")
                 {
                     Instantiate(projectile, transform.position, transform.rotation);
@@ -57,12 +57,27 @@ public class EnemyMovement : EnemyScript
                 direction = Vector3.zero;
             }*/
         }
-        
-      else if(!ranged)
+        else if(!ranged)
         {
             //moves enemy towards player
-          //  direction = Vector3.zero;
-                this.transform.position = this.transform.position + velocity;
+            this.transform.position = this.transform.position + velocity;
+
+            // Since the enemy is not ranged, if they are within the range distance, they can now attack, so wait until timer is 0 to attack.
+            if (direction.magnitude < rangeDistance) 
+            {
+                // If timer is at or below 0, attack and restart the countdown.
+                if (timer <= 0)
+                {
+                    // Only spawn a projectile if the object is not the flying demon as the flying demon has their own projetile script.
+                    if (this.gameObject.name != "flyingdemon")
+                    {
+                        Instantiate(projectile, transform.position, transform.rotation);
+                    }
+
+                    timer = cooldown;
+                }
+                timer -= Time.deltaTime;
+            }
 
         }
 

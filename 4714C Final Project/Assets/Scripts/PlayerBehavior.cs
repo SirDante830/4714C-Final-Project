@@ -40,7 +40,7 @@ public class PlayerBehavior : MonoBehaviour
     };
 
     // Variables for lives and score.
-    private int maxLives = 20;
+    private int maxLives = 100;
     private int _lives = 0;
 
     // When hit by an enemy or enemy attack, this is the amount of lives the player loses.

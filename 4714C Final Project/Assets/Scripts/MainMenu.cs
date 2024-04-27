@@ -34,14 +34,14 @@ public class MainMenu : MonoBehaviour
     public void PlaySnowBiome()
     {
         // Set chosen level, number of obstacles, and size of the map.
-        CreateMapandType.chosenLevel = CreateMapandType.levelTypes.Snow;
-        CreateMapandType.obstaclesToSpawn = Random.Range(snowMinObstaclesAmount, snowMaxObstaclesAmount);
+        CreateMap.chosenLevel = CreateMap.levelTypes.Snow;
+        CreateMap.obstaclesToSpawn = Random.Range(snowMinObstaclesAmount, snowMaxObstaclesAmount);
 
         // Since map has a separate width and height, use the same number for both.
         // Maybe change this to do separate width and height for more variance.
         float randomSize = Random.Range(snowMinMapSize, snowMaxMapSize);
-        CreateMapandType.mapWidth = (int)randomSize;
-        CreateMapandType.mapHeight = (int)randomSize;
+        CreateMap.mapWidth = (int)randomSize;
+        CreateMap.mapHeight = (int)randomSize;
 
         LoadScene("Game");
     }
@@ -50,14 +50,14 @@ public class MainMenu : MonoBehaviour
     public void PlayGrasslandBiome()
     {
         // Set chosen level, number of obstacles, and size of the map.
-        CreateMapandType.chosenLevel = CreateMapandType.levelTypes.Grassland;
-        CreateMapandType.obstaclesToSpawn = Random.Range(grasslandMinObstaclesAmount, grasslandMaxObstaclesAmount);
+        CreateMap.chosenLevel = CreateMap.levelTypes.Grassland;
+        CreateMap.obstaclesToSpawn = Random.Range(grasslandMinObstaclesAmount, grasslandMaxObstaclesAmount);
 
         // Since map has a separate width and height, use the same number for both.
         // Maybe change this to do separate width and height for more variance.
         float randomSize = Random.Range(grasslandMinMapSize, grasslandMaxMapSize);
-        CreateMapandType.mapWidth = (int)randomSize;
-        CreateMapandType.mapHeight = (int)randomSize;
+        CreateMap.mapWidth = (int)randomSize;
+        CreateMap.mapHeight = (int)randomSize;
 
         LoadScene("Game");
     }
@@ -66,14 +66,14 @@ public class MainMenu : MonoBehaviour
     public void PlayDesertBiome()
     {
         // Set chosen level, number of obstacles, and size of the map.
-        CreateMapandType.chosenLevel = CreateMapandType.levelTypes.Desert;
-        CreateMapandType.obstaclesToSpawn = Random.Range(desertMinObstaclesAmount, desertMaxObstaclesAmount);
+        CreateMap.chosenLevel = CreateMap.levelTypes.Desert;
+        CreateMap.obstaclesToSpawn = Random.Range(desertMinObstaclesAmount, desertMaxObstaclesAmount);
 
         // Since map has a separate width and height, use the same number for both.
         // Maybe change this to do separate width and height for more variance.
         float randomSize = Random.Range(desertMinMapSize, desertMaxMapSize);
-        CreateMapandType.mapWidth = (int)randomSize;
-        CreateMapandType.mapHeight = (int)randomSize;
+        CreateMap.mapWidth = (int)randomSize;
+        CreateMap.mapHeight = (int)randomSize;
 
         LoadScene("Game");
     }

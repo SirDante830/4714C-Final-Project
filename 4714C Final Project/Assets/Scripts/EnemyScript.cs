@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
-using static CreateMapandType;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -34,19 +33,22 @@ public class EnemyScript : MonoBehaviour
         switch (EnemySelection)
         {
             case "Crawler":
-                Debug.Log($"{EnemySelection}");
+                //Debug.Log($"{EnemySelection}");
                 EnemyHP = 100;
                 EnemySpeed = 1.5f;
+                EnemyMovement.speed = EnemySpeed;
                 break;
             case "Speeder":
-                EnemyClass(EnemySelection);
+                //EnemyClass(EnemySelection);
                 EnemyHP = 150;
                 EnemySpeed = 2.5f;
+                EnemyMovement.speed = EnemySpeed;
                 break;
             case "Shooter":
-                EnemyClass(EnemySelection);
+                //EnemyClass(EnemySelection);
                 EnemyHP = 200;
                 EnemySpeed = 1.5f;
+                EnemyMovement.speed = EnemySpeed;
                 break;
             default:
                 break;

@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, rotation);
 
         // Destroy the bullet after a few seconds.
-        Destroy(this.gameObject, 10.0f);
+        Destroy(this.gameObject, 5.0f);
     }
     void Update()
     {
