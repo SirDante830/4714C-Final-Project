@@ -18,10 +18,11 @@ public class CreateMapandType : MonoBehaviour
     private Color mapColor;
 
     // Determine the size of the map.
-    public int mapWidth = 10;
-    public int mapHeight = 10;
+    private int mapWidth = 20;
+    private int mapHeight = 20;
     private float tileSize = 2.0f;
 
+    [Header("Biome Tiles")]
     // Sprites that are used for each biome.
     [SerializeField] private Sprite grassSprite;
     [SerializeField] private Sprite desertSprite;
@@ -31,6 +32,29 @@ public class CreateMapandType : MonoBehaviour
     [SerializeField] private GameObject tilePrefab;
     private GameObject background;
 
+
+    [Header("Border")]
+    // Thickness of border and housing object for it.
+    private float borderThickness = 6.5f;
+    private GameObject border;
+
+    // Distance border is from the edges of the map
+    // (may change if camera zooms in or out over time as zoomed out camera could see outside the map).
+    private float borderEdgeDistance = 10f;
+    
+    // Border piece game object.
+    private GameObject CreateBorderPiece (string name, Vector2 position, Vector2 scale)
+    {
+        // Create the object with a specified name, add a collider, set the collider to not trigger to ensure collision, 
+        // set its position, set its scale, and return the newly screated borderPiece.
+        GameObject borderPiece = new GameObject (name);
+        BoxCollider2D collider = borderPiece.AddComponent<BoxCollider2D> ();
+        collider.isTrigger = false;
+        borderPiece.transform.position = position;
+        borderPiece.transform.localScale = new Vector3(scale.x, scale.y, 1f);
+        return borderPiece;
+    }
+
     public enum levelTypes
     {
         Grassland,
@@ -38,20 +62,25 @@ public class CreateMapandType : MonoBehaviour
         Snow
     }
 
+    [Header("Level Select")]
     //Allows the user to select their level type in the Unity Editor
-    [SerializeField] public levelTypes levelSelect;
+    //[SerializeField] private levelTypes levelSelect;
+
     //This stores the level selected, and it will be used in the switch case statement to establish the map
     [HideInInspector] public static levelTypes chosenLevel;
 
     //Depending on the enum selected, make the map with length, height, and color it here through if statements or cases
     void Start()
     {
+        // Create the border around the map.
+        CreateBorder();
+
         // Create an empty game object called Background to store the tiles.
         background = new GameObject("Background");
 
         // Create an offset so that the center of the map is the center of the world in Unity (0,0).
-        float xOffset = -((mapWidth - 1) * tileSize / 2.0f);
-        float yOffset = -((mapHeight - 1) * tileSize / 2.0f);
+        float xOffset = -((mapWidth - 1) * tileSize / 2);
+        float yOffset = -((mapHeight - 1) * tileSize / 2);
 
         // Create the map and obstacles based on which level is chosen.
         switch (chosenLevel)
@@ -77,6 +106,44 @@ public class CreateMapandType : MonoBehaviour
         Debug.Log(typeSelection);
         
         FindLevelType(typeSelection);*/
+    }
+
+    // Creates the border around the map.
+    void CreateBorder()
+    {
+        // Create an empty game object to the store the border in.
+        border = new GameObject("Border");
+
+        float halfMapWidth = (mapWidth - borderEdgeDistance) * tileSize / 2;
+        float halfMapHeight = (mapHeight - borderEdgeDistance) * tileSize / 2;
+
+        // Create the left border and child it to the border object.
+        GameObject leftBorder = CreateBorderPiece("LeftBorder",
+            new Vector2(-halfMapWidth - borderThickness / 2, 0f),
+            new Vector2(borderThickness, (mapHeight * tileSize) + borderThickness)
+            );
+        leftBorder.transform.parent = border.transform;
+
+        // Create the right border.
+        GameObject rightBorder = CreateBorderPiece("RightBorder",
+            new Vector2(halfMapWidth + borderThickness / 2, 0f),
+            new Vector2(borderThickness, (mapHeight * tileSize) + borderThickness)
+            );
+        rightBorder.transform.parent = border.transform;
+
+        // Create the top border.
+        GameObject topBorder = CreateBorderPiece("TopBorder",
+            new Vector2(0f, halfMapHeight + borderThickness / 2),
+            new Vector2((mapWidth * tileSize) + borderThickness, borderThickness)
+            );
+        topBorder.transform.parent = border.transform;
+
+        // Create the bottom border.
+        GameObject bottomBorder = CreateBorderPiece("BottomBorder",
+            new Vector2(0f, -halfMapHeight - borderThickness / 2),
+            new Vector2((mapWidth * tileSize) + borderThickness, borderThickness)
+            );
+        bottomBorder.transform.parent = border.transform;
     }
 
     // Create the tile grid that will serve as the background by spawning the rows and columns.
@@ -195,12 +262,12 @@ public class CreateMapandType : MonoBehaviour
         }
     */
 
+    [Header("Obstacles")]
     //Used to assign certain prefabs into the scene
-    public GameObject obstaclePrefab;
-    public GameObject grassObs;
-    public GameObject desertObs;
-    public GameObject snowObs;
-    private GameObject allObstacles;
+    [SerializeField] private GameObject grassObs;
+    [SerializeField] private GameObject desertObs;
+    [SerializeField] private GameObject snowObs;
+    private GameObject obstaclePrefab;
     private Color obsColor;
     private float xCoord;
     private float yCoord;

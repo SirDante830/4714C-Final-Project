@@ -180,8 +180,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0012981909eeb4f9de673511c75351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapWidth: 100
-  mapHeight: 100
+  mapWidth: 10
+  mapHeight: 10
   grassSprite: {fileID: 21300000, guid: 51720bba2c1c233448bc8b8cc17ba2d8, type: 3}
   desertSprite: {fileID: 21300000, guid: 3d88da27b3f9eca459f7aa792053e3d6, type: 3}
   snowSprite: {fileID: 21300000, guid: 28cd16a2b596cb8459a3cf4ebcb6d054, type: 3}
