@@ -145,20 +145,6 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
     
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        // If player collides with tag Enemy, then run the take damage function.
-        if (collision.CompareTag("Enemy"))
-        {
-            TakeDamage();
-        }
-        else if (collision.CompareTag("Projectile"))
-        {
-            TakeDamage();
-            Destroy(collision.gameObject);
-        }
-    }
-    
     // Temporary coroutine that changes the player's color when they collide with an enemy.
     IEnumerator ColorChange()
     {
@@ -316,7 +302,9 @@ public class PlayerBehavior : MonoBehaviour
         }
 
         //Slowly enhance your character every 10 hits
-        if(_score % 100 == 0)
+        // Ensure the _score > 0 check remains or else this if statment will cause false positives, resulting in the player gaining
+        // lives even if their score is at 0. Checking that the score is above 0 ensures that does not happen.
+        if(_score > 0 && _score % 100 == 0)
         {
             maxLives++;
             _lives++;
@@ -342,8 +330,6 @@ public class PlayerBehavior : MonoBehaviour
         // Try to change lives.
         try
         {
-            Debug.Log($"Changing lives by {livesChange}. New lives count: {Lives + livesChange}");
-
             // Adjust the lives by the change amount.
             Lives += livesChange;
             

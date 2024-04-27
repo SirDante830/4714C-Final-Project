@@ -18,4 +18,14 @@ public class Bullet : MonoBehaviour
     {
         transform.Translate(velocity * speed * Time.deltaTime);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // If bullet enters the player's trigger, deal damage to the player and destroy the bullet.
+        if (collision.CompareTag("Player"))
+        {
+            collision.GetComponent<PlayerBehavior>().TakeDamage();
+            Destroy(this.gameObject);
+        }
+    }
 }

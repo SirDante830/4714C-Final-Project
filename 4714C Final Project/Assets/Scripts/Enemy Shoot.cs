@@ -26,10 +26,10 @@ public class EnemyShoot : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-       // if(collision.CompareTag("Player"))
-       // {
-       //     collision.GetComponent<PlayerBehavior>().ChangeLives(-1);
-       // }
-       //// Destroy(gameObject);
+        if (collision.CompareTag("Player"))
+        {
+            collision.GetComponent<PlayerBehavior>().TakeDamage();
+        }
+        // Destroy(gameObject);
     }
 }
