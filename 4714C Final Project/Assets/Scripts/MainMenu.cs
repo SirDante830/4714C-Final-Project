@@ -6,22 +6,22 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     // Variables for snow biome size and obstacles.
-    private float snowMinMapSize = 9.0f;
-    private float snowMaxMapSize = 14.0f;
-    private int snowMinObstaclesAmount = 30;
-    private int snowMaxObstaclesAmount = 50;
+    private float snowMinMapSize = 50.0f;
+    private float snowMaxMapSize = 80.0f;
+    private int snowMinObstaclesAmount = 40;
+    private int snowMaxObstaclesAmount = 65;
 
     // Variables for grassland biome size and obstacles.
-    private float grasslandMinMapSize = 12.5f;
-    private float grasslandMaxMapSize = 17.5f;
-    private int grasslandMinObstaclesAmount = 45;
-    private int grasslandMaxObstaclesAmount = 65;
+    private float grasslandMinMapSize = 65f;
+    private float grasslandMaxMapSize = 100f;
+    private int grasslandMinObstaclesAmount = 60;
+    private int grasslandMaxObstaclesAmount = 85;
 
     // Variables for desert biome size and obstacles.
-    private float desertMinMapSize = 7.5f;
-    private float desertMaxMapSize = 12.5f;
-    private int desertMinObstaclesAmount = 25;
-    private int desertMaxObstaclesAmount = 40;
+    private float desertMinMapSize = 85f;
+    private float desertMaxMapSize = 150f;
+    private int desertMinObstaclesAmount = 60;
+    private int desertMaxObstaclesAmount = 100;
 
 
     private void Start()
@@ -33,30 +33,48 @@ public class MainMenu : MonoBehaviour
     // Load the game scene with a snow biome.
     public void PlaySnowBiome()
     {
-        // Set chosen level, size of the map, and number of obstacles.
+        // Set chosen level, number of obstacles, and size of the map.
         CreateMapandType.chosenLevel = CreateMapandType.levelTypes.Snow;
-        CreateMapandType.mapSize = Random.Range(snowMinMapSize, snowMaxMapSize);
         CreateMapandType.obstaclesToSpawn = Random.Range(snowMinObstaclesAmount, snowMaxObstaclesAmount);
+
+        // Since map has a separate width and height, use the same number for both.
+        // Maybe change this to do separate width and height for more variance.
+        float randomSize = Random.Range(snowMinMapSize, snowMaxMapSize);
+        CreateMapandType.mapWidth = (int)randomSize;
+        CreateMapandType.mapHeight = (int)randomSize;
+
         LoadScene("Game");
     }
 
     // Load the game scene with a grassland biome.
     public void PlayGrasslandBiome()
     {
-        // Set chosen level, size of the map, and number of obstacles.
+        // Set chosen level, number of obstacles, and size of the map.
         CreateMapandType.chosenLevel = CreateMapandType.levelTypes.Grassland;
-        CreateMapandType.mapSize = Random.Range(grasslandMinMapSize, grasslandMaxMapSize);
         CreateMapandType.obstaclesToSpawn = Random.Range(grasslandMinObstaclesAmount, grasslandMaxObstaclesAmount);
+
+        // Since map has a separate width and height, use the same number for both.
+        // Maybe change this to do separate width and height for more variance.
+        float randomSize = Random.Range(grasslandMinMapSize, grasslandMaxMapSize);
+        CreateMapandType.mapWidth = (int)randomSize;
+        CreateMapandType.mapHeight = (int)randomSize;
+
         LoadScene("Game");
     }
 
     // Load the game scene with a desert biome.
     public void PlayDesertBiome()
     {
-        // Set chosen level, size of the map, and number of obstacles.
+        // Set chosen level, number of obstacles, and size of the map.
         CreateMapandType.chosenLevel = CreateMapandType.levelTypes.Desert;
-        CreateMapandType.mapSize = Random.Range(desertMinMapSize, desertMaxMapSize);
         CreateMapandType.obstaclesToSpawn = Random.Range(desertMinObstaclesAmount, desertMaxObstaclesAmount);
+
+        // Since map has a separate width and height, use the same number for both.
+        // Maybe change this to do separate width and height for more variance.
+        float randomSize = Random.Range(desertMinMapSize, desertMaxMapSize);
+        CreateMapandType.mapWidth = (int)randomSize;
+        CreateMapandType.mapHeight = (int)randomSize;
+
         LoadScene("Game");
     }
 

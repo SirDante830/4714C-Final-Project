@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 533359895025293275}
   - component: {fileID: 4390203494285670986}
   - component: {fileID: 9051289877304096162}
-  - component: {fileID: 8280635343665525049}
+  - component: {fileID: 3939839004921290325}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -35,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6172209998916336362
 SpriteRenderer:
@@ -148,8 +148,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.003361702, y: 0.042171717}
-  m_Size: {x: 1.2524929, y: 1.586041}
+  m_Offset: {x: -0.0026513338, y: 0.09088594}
+  m_Size: {x: 1.1502712, y: 1.2626475}
   m_Direction: 0
 --- !u!114 &4390203494285670986
 MonoBehaviour:
@@ -192,7 +192,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!70 &8280635343665525049
+--- !u!70 &3939839004921290325
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,6 +224,6 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.003361702, y: 0.042171717}
-  m_Size: {x: 1.2524929, y: 1.586041}
+  m_Offset: {x: 0.005053282, y: -0.04972279}
+  m_Size: {x: 0.5878359, y: 1.0122483}
   m_Direction: 0

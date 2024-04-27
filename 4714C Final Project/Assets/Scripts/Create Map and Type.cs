@@ -10,16 +10,17 @@ public class CreateMapandType : MonoBehaviour
     //The int will be measured as pixels
     //public int lengthOfMap = 10;
     //public int heightOfMap = 10;
-    public static int obstaclesToSpawn;
-    private Camera cam;
-    private Color backgroundColor;
-    private string typeSelection;
-    public static float mapSize;
-    private Color mapColor;
+    //private Camera cam;
+    //private Color backgroundColor;
+    //private string typeSelection;
+    //public static float mapSize;
+    //private Color mapColor;
+
+    public static int obstaclesToSpawn = 40;
 
     // Determine the size of the map.
-    private int mapWidth = 20;
-    private int mapHeight = 20;
+    public static int mapWidth = 50;
+    public static int mapHeight = 50;
     private float tileSize = 2.0f;
 
     [Header("Biome Tiles")]
@@ -276,6 +277,8 @@ public class CreateMapandType : MonoBehaviour
     //THIS IS CODE FOR GENERATING OBSTACLES, WE NEED TO MAKE THEM UNIQUE TO THE BIOME TYPE
     void GenerateObstacles(string levelType)
     {
+        GameObject obstacles = new GameObject("Obstacles");
+
         switch(levelType)
         {
             case ("Grassland"):
@@ -291,21 +294,24 @@ public class CreateMapandType : MonoBehaviour
         for (int obstacleSpawned = 0; obstacleSpawned < obstaclesToSpawn; obstacleSpawned++)
         {
             //Random values for x and y coordinates, only within the map boundaries
-            //4.9f to prevent the sprite image itself from reaching out of the map
-            xCoord = UnityEngine.Random.Range(-mapSize * 4.9f, mapSize * 4.9f);
-            yCoord = UnityEngine.Random.Range(-mapSize * 4.9f, mapSize * 4.9f);
+            // Removed the 4.9 as it ended up going way outside the map.
+                //4.9f to prevent the sprite image itself from reaching out of the map
+            xCoord = UnityEngine.Random.Range(-mapWidth, mapWidth);
+            yCoord = UnityEngine.Random.Range(-mapHeight, mapHeight);
             
             //prevents obstacles from spawning on player start
             while((xCoord < 3f && xCoord > -3f) && (yCoord < 3f && yCoord > -3f))
             {
-                xCoord = UnityEngine.Random.Range(-mapSize * 4.9f, mapSize * 4.9f);
-                yCoord = UnityEngine.Random.Range(-mapSize * 4.9f, mapSize * 4.9f);
+                xCoord = UnityEngine.Random.Range(-mapWidth, mapWidth);
+                yCoord = UnityEngine.Random.Range(-mapHeight, mapHeight);
             }
             //this is not used, I'm keeping it here just in case.
             scale = UnityEngine.Random.Range(0.5f, 1.5f);
 
             //Creates obstacle and assigns it in world through x and y coordinates. -0.01f for z-axis in case of layer issues
-            Instantiate(obstaclePrefab, new Vector3(xCoord, yCoord, -0.01f), transform.rotation);
+            GameObject newObstacle = Instantiate(obstaclePrefab, new Vector3(xCoord, yCoord, -0.01f), transform.rotation);
+            newObstacle.transform.parent = obstacles.transform;
+
             
 
             //set to obstacle parent
