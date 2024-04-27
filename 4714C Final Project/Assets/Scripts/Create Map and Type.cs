@@ -17,6 +17,20 @@ public class CreateMapandType : MonoBehaviour
     public static float mapSize;
     private Color mapColor;
 
+    // Determine the size of the map.
+    public int mapWidth = 10;
+    public int mapHeight = 10;
+    private float tileSize = 2.0f;
+
+    // Sprites that are used for each biome.
+    [SerializeField] private Sprite grassSprite;
+    [SerializeField] private Sprite desertSprite;
+    [SerializeField] private Sprite snowSprite;
+
+    // Objects that contain the look of the background.
+    [SerializeField] private GameObject tilePrefab;
+    private GameObject background;
+
     public enum levelTypes
     {
         Grassland,
@@ -32,13 +46,68 @@ public class CreateMapandType : MonoBehaviour
     //Depending on the enum selected, make the map with length, height, and color it here through if statements or cases
     void Start()
     {
-        cam = GetComponent<Camera>();
+        // Create an empty game object called Background to store the tiles.
+        background = new GameObject("Background");
+
+        // Create an offset so that the center of the map is the center of the world in Unity (0,0).
+        float xOffset = -((mapWidth - 1) * tileSize / 2.0f);
+        float yOffset = -((mapHeight - 1) * tileSize / 2.0f);
+
+        // Create the map and obstacles based on which level is chosen.
+        switch (levelSelect)
+        {
+            case levelTypes.Grassland:
+                CreateGrid(grassSprite, xOffset, yOffset);
+                GenerateObstacles("Grassland");
+                break;
+            case levelTypes.Desert:
+                CreateGrid(desertSprite, xOffset, yOffset);
+                GenerateObstacles("Desert");
+                break;
+            case levelTypes.Snow:
+                CreateGrid(snowSprite, xOffset, yOffset);
+                GenerateObstacles("Snow");
+                break;
+                
+        }
+
+        /*cam = GetComponent<Camera>();
         //chosenLevel = levelSelect;
         typeSelection = chosenLevel.ToString();
         Debug.Log(typeSelection);
         
-        FindLevelType(typeSelection);
+        FindLevelType(typeSelection);*/
     }
+
+    // Create the tile grid that will serve as the background by spawning the rows and columns.
+    void CreateGrid(Sprite tileSprite, float xOffset, float yOffset)
+    {
+        // Repeat the spawning of columns for each of the tile x positions.
+        for (int i = 0; i < mapWidth; i++)
+        {
+            // Spawn the columns.
+            for (int j = 0; j < mapHeight; j++)
+            {
+                // Spawn the tile and set its parent.
+                GameObject tile = Instantiate(tilePrefab);
+                tile.transform.parent = background.transform;
+
+                // Find the sprite renderer on the tile and set its sprite to the one inputted when this function was run.
+                SpriteRenderer renderer = tile.GetComponent<SpriteRenderer>();
+                renderer.sprite = tileSprite;
+
+                // Set the position of the tile based on its index in the array, size, and offset in the world.
+                tile.transform.position = new Vector2((i * tileSize) + xOffset, (j * tileSize) + yOffset);
+
+                // Set the scale of the tile to the tile size chosen with a slight offset to prevent rendering errors
+                // where each tile will be fighting to be on top of the other.
+                tile.transform.localScale = new Vector2(tileSize - (tileSize * 0.215f), tileSize - (tileSize * 0.215f));
+            }
+        }
+    }
+
+    /*
+* No longer being used as new map spawn exists now.
 
     void FindLevelType(string typeSelection)
     {
@@ -103,6 +172,8 @@ public class CreateMapandType : MonoBehaviour
         Ground.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
+    */
+
     /*
        //THIS IS CODE FOR GENERATING OBSTACLES, WE NEED TO MAKE THEM UNIQUE TO THE BIOME TYPE
     for (int obstacleSpawned = 0; obstacleSpawned < obstaclesToSpawn; obstacleSpawned++)
@@ -134,8 +205,9 @@ public class CreateMapandType : MonoBehaviour
     private float xCoord;
     private float yCoord;
     private float scale;
-       //THIS IS CODE FOR GENERATING OBSTACLES, WE NEED TO MAKE THEM UNIQUE TO THE BIOME TYPE
-       void GenerateObstacles(string levelType)
+
+    //THIS IS CODE FOR GENERATING OBSTACLES, WE NEED TO MAKE THEM UNIQUE TO THE BIOME TYPE
+    void GenerateObstacles(string levelType)
     {
         switch(levelType)
         {
@@ -172,11 +244,5 @@ public class CreateMapandType : MonoBehaviour
             //set to obstacle parent
             //obstaclePrefab.transform.SetParent(allObstacles.transform);
         }
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

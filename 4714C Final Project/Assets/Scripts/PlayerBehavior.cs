@@ -303,6 +303,12 @@ public class PlayerBehavior : MonoBehaviour
             _lives = maxLives;
         }
 
+        // If lives goes under 0, set it back to 0.
+        if (_lives <= 0)
+        {
+            _lives = 0;
+        }
+
         // If score somehow goes below 0, set it back to 0.
         if (_score < 0)
         {
@@ -336,6 +342,8 @@ public class PlayerBehavior : MonoBehaviour
         // Try to change lives.
         try
         {
+            Debug.Log($"Changing lives by {livesChange}. New lives count: {Lives + livesChange}");
+
             // Adjust the lives by the change amount.
             Lives += livesChange;
             
@@ -362,6 +370,8 @@ public class PlayerBehavior : MonoBehaviour
     // Function to set UI.
     void SetUI()
     {
+        Debug.Log("Run " + Lives);
+        Debug.Log("Run2 " + _lives);
         // Set the livesText to the text in "" + the current lives variable value.
         livesText.text = "Lives " + _lives;
 
