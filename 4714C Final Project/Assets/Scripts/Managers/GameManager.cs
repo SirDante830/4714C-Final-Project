@@ -1,10 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    // Create a singleton refernce.
+    public static GameManager instance;
+
     // Reference to the player behavior script.
     private PlayerBehavior pB;
 
@@ -19,6 +25,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // Set singleton reference.
+        instance = this;
+
         // Set player behavior script reference.
         pB = GameObject.FindWithTag("Player").GetComponent<PlayerBehavior>();
 
@@ -30,6 +39,9 @@ public class GameManager : MonoBehaviour
 
         // Invoke the spawning enemies function and repeat it every 15 seconds.
         InvokeRepeating("SpawnEnemies", 2f, 15f);
+
+        // Load the player data
+        LoadPlayer();
     }
     // Function that loads the inputted scene string name
     void LoadScene(string sceneName)
@@ -103,6 +115,51 @@ public class GameManager : MonoBehaviour
 
             // Spawn the second enemy in the array (speeder).
             Instantiate(enemies[2], new Vector3(randomSpawnX, randomSpawnY, 1f), transform.rotation, enemiesHousing.transform);
+        }
+    }
+
+    // Save the player data.
+    public void SavePlayer()
+    {
+        SaveSystem.SavePlayer(pB);
+    }
+
+    // Load the player data.
+    private void LoadPlayer()
+    {
+        try
+        {
+            PlayerData data = SaveSystem.LoadPlayer();
+
+            // Set the player script variables to the data loaded.
+            pB.Lives = data.lives;
+            pB.Score = data.score;
+
+            // Create a vector 3 that takes the x, y, and z info stored in the position array that was created in PlayerData.
+            Vector3 position;
+            position.x = data.position[0];
+            position.y = data.position[1];
+            position.z = data.position[2];
+            pB.transform.position = position;
+
+            // Set player's class name.
+            pB.className = data.playerClass;
+
+            // Set the player UI.
+            pB.SetUI();
+
+            //// Set the map biome and size.
+            //CreateMap.chosenLevel = data.biome;
+            //CreateMap.mapWidth = data.mapWidth;
+            //CreateMap.mapHeight = data.mapHeight;
+        }
+        catch (Exception)
+        {
+            //Debug.LogWarning("No save data found!");
+        }
+        finally
+        {
+            pB.PlayerClass();
         }
     }
 }

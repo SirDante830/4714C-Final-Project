@@ -20,7 +20,7 @@ public class PlayerBehavior : MonoBehaviour
 
     // Variables used for player class and color.
     private Color classColor;
-    private string className;
+    [HideInInspector] public string className;
     private float colorChangeTime = 0.25f; // Time between changes of color when player takes damage.
 
     // Variables used for weapon behavior.
@@ -100,7 +100,7 @@ public class PlayerBehavior : MonoBehaviour
         verticalMovement = Input.GetAxis("Vertical");
 
         // Function that gives the player a random class, but will probably change in the future for player to choose their class.
-        PlayerClass();
+        //PlayerClass();
 
         // Set player lives to the max at the start. Do this before setting UI so it is up to date.
         Lives = maxLives;
@@ -211,44 +211,60 @@ public class PlayerBehavior : MonoBehaviour
 
     // Function that sets the player's class.
     // Will probably change as I think player will have the ability to choose their class.
-    void PlayerClass()
+    public void PlayerClass()
     {
-        // Create a random number that uses the length of the list as the max value.
-        float randomNum = Random.Range(0, playerClassName.Count);
-
-        // Set the player's className to an int version of the random number variable. 
-        // Use (int) just in case number haapens to be float.
-        className = playerClassName[(int) randomNum];
-        
-        // Display the player's class in the console window.
-        //Debug.Log($"Your class is: {className}");
-
-        // Use a switch statement to change the player's color and speed based on their class.
-        switch (className)
+        // Try to load the class name saved in the player save data.
+        try
         {
-            case "archer":
-                // Player is archer, so use base color and make them quick.
-                classColor = Color.white;
-                playerSpeed = 7.0f;
-                break;
-            case "wizard":
-                // Player is wizard, so make them cyan since it stands out and slow them down.
-                classColor = Color.cyan;
-                playerSpeed = 5.5f;
-                break;
-            case "blueberry":
-                // Player is blueberry so make them blue and zoomin.
-                classColor = Color.blue;
-                playerSpeed = 8.5f;
-                break;
-            default:
-                // If none of the classes above, use base color and base speed.
-                classColor = Color.white;
-                break;
+            PlayerData data = SaveSystem.LoadPlayer();
+            className = data.playerClass;
         }
-        
-        // Once classColor is set, apply it.
-        this.GetComponent<Renderer>().material.color = classColor;
+        // If it doesn't exist, an exception will occur, so give the player a random class.
+        catch (Exception)
+        {
+            //Debug.Log("Exception: " + e);
+
+            // Create a random number that uses the length of the list as the max value.
+            float randomNum = Random.Range(0, playerClassName.Count);
+
+            // Set the player's className to an int version of the random number variable. 
+            // Use (int) just in case number haapens to be float.
+            className = playerClassName[(int)randomNum];
+
+            // Display the player's class in the console window.
+            //Debug.Log($"Your class is: {className}");
+        }
+        // Whether the className was loaded from save data or randomly chosen, set the variables based on the className.
+        finally
+        {
+            // Use a switch statement to change the player's color and speed based on their class.
+            switch (className)
+            {
+                case "archer":
+                    // Player is archer, so use base color and make them quick.
+                    classColor = Color.white;
+                    playerSpeed = 7.0f;
+                    break;
+                case "wizard":
+                    // Player is wizard, so make them cyan since it stands out and slow them down.
+                    classColor = Color.cyan;
+                    playerSpeed = 5.5f;
+                    break;
+                case "blueberry":
+                    // Player is blueberry so make them blue and zoomin.
+                    Color blueberryColour = new Color(0.31f, 0.53f, 0.97f);
+                    classColor = Color.blue;
+                    playerSpeed = 8.5f;
+                    break;
+                default:
+                    // If none of the classes above, use base color and base speed.
+                    classColor = Color.white;
+                    break;
+            }
+
+            // Once classColor is set, apply it.
+            this.GetComponent<Renderer>().material.color = classColor;
+        }
     }
 
     void SpawnPlayerWeapon()
@@ -363,7 +379,7 @@ public class PlayerBehavior : MonoBehaviour
     }
 
     // Function to set UI.
-    void SetUI()
+    public void SetUI()
     {
         // Set the livesText to the text in "" + the current lives variable value.
         livesText.text = "Lives " + _lives;
