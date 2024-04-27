@@ -54,7 +54,7 @@ public class CreateMapandType : MonoBehaviour
         float yOffset = -((mapHeight - 1) * tileSize / 2.0f);
 
         // Create the map and obstacles based on which level is chosen.
-        switch (levelSelect)
+        switch (chosenLevel)
         {
             case levelTypes.Grassland:
                 CreateGrid(grassSprite, xOffset, yOffset);
