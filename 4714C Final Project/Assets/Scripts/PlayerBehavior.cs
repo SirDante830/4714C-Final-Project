@@ -272,7 +272,16 @@ public class PlayerBehavior : MonoBehaviour
         {
             return; // Not enough time has passed, so exit the function.
         }
-        
+        else if (Time.time - lastAttackTime < bombCoolDown && bombs == 0)
+        {
+            return; // Not enough time has passed, so exit the function.
+            
+        }
+        else if (Time.time - lastAttackTime > bombCoolDown)
+        {
+            bombs += 3;
+        }
+
         if (Input.GetKey(KeyCode.Space))
         {
             // Spawn the attack at the player's position and give it a variable name.
@@ -297,7 +306,7 @@ public class PlayerBehavior : MonoBehaviour
 
 
         }
-        else if (Input.GetKey(KeyCode.Z))
+        else if (Input.GetKey(KeyCode.Z) && bombs >= 1 )
         {
             // Spawn the attack at the player's position and give it a variable name.
             playerAttack = Instantiate(playerBomb, playerTransform.position, Quaternion.identity);
@@ -320,51 +329,10 @@ public class PlayerBehavior : MonoBehaviour
             }
             bombs -= 1;
             Debug.Log($"Bomb: {bombs}");
-            if(bombs == 0)
-            {
-               /* if (Time.time - lastAttackTime < bombCoolDown)
-                {
-                    return; // Not enough time has passed, so exit the function.
-                }*/
-                //wait 5 seconds after no bombs, then add a bomb every 3 or so seconds
-                StartCoroutine(TimeCoroutine());
-
-            }
 
         }
         lastAttackTime = Time.time; // Begin attack cooldown.       
     }
-   /* void Bomb()
-    {
-        // Check to see if enough time has passed since the last weapon spawn to spawn another.
-        if (Time.time - lastAttackTime < playerAttackCooldown)
-        {
-            return; // Not enough time has passed, so exit the function.
-        }
-
-        // Spawn the attack at the player's position and give it a variable name.
-        GameObject playerAttack = Instantiate(playerBomb, playerTransform.position, Quaternion.identity);
-        // Get the rigidbody of the player's attack.
-        Rigidbody2D playerAttackRb = playerAttack.GetComponent<Rigidbody2D>();
-
-        // As long as the playerAttack's rigidbody exits (does not equal null), run code below.
-        if (playerAttackRb != null)
-        {
-            // Set the direction the attack moves in the direction the player is facing.
-            playerAttackRb.velocity = lastFacingDirection * playerAttackSpeed;
-
-            // Calculate the angle based on the movement direction of the player.
-            // Once calculated, set the player's attack to that rotation.
-            float angle = Mathf.Atan2(lastFacingDirection.x, -lastFacingDirection.y) * Mathf.Rad2Deg;
-            playerAttack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
-        else
-        {
-            Debug.LogWarning("Rigidbody2D not found on player attack."); // Debug here in case issue occurs.
-        }
-
-        lastAttackTime = Time.time; // Begin attack cooldown.      
-    }*/
 
     // Function is called when the weapon is destroyed. This then resets the cooldown timer, allowing the player to attack again.
     public void WeaponDestroyed()
@@ -438,14 +406,6 @@ public class PlayerBehavior : MonoBehaviour
 
         // Set the scoreText to the text in "" + the current score variable value.
         scoreText.text = _score + " Score";
-    }
-
-
-    IEnumerator TimeCoroutine()
-    {
-        yield return new WaitForSeconds(5);
-        bombs += 3;
-
     }
     // Coroutine that starts when the player has no more lives.
     IEnumerator ZeroLivesRemaining()
