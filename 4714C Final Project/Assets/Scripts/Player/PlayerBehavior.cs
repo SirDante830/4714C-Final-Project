@@ -113,6 +113,9 @@ public class PlayerBehavior : MonoBehaviour
     {
         // Run PlayerInput function that checks for any input made by the user.
         PlayerInput();
+
+        // Check to make sure the player's save data does not spawn them outside the map.
+        BoundaryChecks();
     }
 
     void FixedUpdate()
@@ -416,5 +419,15 @@ public class PlayerBehavior : MonoBehaviour
         invincible = true;
         yield return new WaitForSeconds(invincibleTime);
         invincible = false;
+    }
+
+    // Check the player's x and y position to ensure that they are not outside of the map's x or y (width or height).
+    void BoundaryChecks()
+    {
+        if (transform.position.x > CreateMap.mapWidth || transform.position.x < -CreateMap.mapWidth
+            || transform.position.y > CreateMap.mapHeight || transform.position.y < -CreateMap.mapHeight)
+        {
+            transform.position = new Vector3(0, 0, transform.position.z);
+        }
     }
 }
