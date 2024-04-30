@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
+using Unity.Burst.CompilerServices;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class PlayerBehavior : MonoBehaviour
     private float lastAttackTime;
     public GameObject playerWeapon;
     private float playerAttackSpeed = 10.5f;
+    public GameObject playerBomb;
+    private float bombCoolDown = 5.0f;
 
     // Create a list of the various classes that the player can be.
     [HideInInspector] public List<string> playerClassName = new List<string>()
@@ -42,6 +45,7 @@ public class PlayerBehavior : MonoBehaviour
     // Variables for lives and score.
     private int maxLives = 100;
     private int _lives = 0;
+    private int bombs = 3;
 
     // When hit by an enemy or enemy attack, this is the amount of lives the player loses.
     private int livesLostOnHit = -1;
@@ -131,7 +135,7 @@ public class PlayerBehavior : MonoBehaviour
         horizontalMovement = Input.GetAxis("Horizontal");
         verticalMovement = Input.GetAxis("Vertical");
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Z))
         {
             SpawnPlayerWeapon();
         }
@@ -272,32 +276,91 @@ public class PlayerBehavior : MonoBehaviour
 
     void SpawnPlayerWeapon()
     {
+        GameObject playerAttack;
         // Check to see if enough time has passed since the last weapon spawn to spawn another.
         if (Time.time - lastAttackTime < playerAttackCooldown)
         {
             return; // Not enough time has passed, so exit the function.
         }
-
-        // Spawn the attack at the player's position and give it a variable name.
-        GameObject playerAttack = Instantiate(playerWeapon, playerTransform.position, Quaternion.identity);
-        // Get the rigidbody of the player's attack.
-        Rigidbody2D playerAttackRb = playerAttack.GetComponent<Rigidbody2D>();
-
-        // As long as the playerAttack's rigidbody exits (does not equal null), run code below.
-        if (playerAttackRb != null)
+        else if (Time.time - lastAttackTime < bombCoolDown && bombs == 0)
         {
-            // Set the direction the attack moves in the direction the player is facing.
-            playerAttackRb.velocity = lastFacingDirection * playerAttackSpeed;
+            return; // Not enough time has passed, so exit the function.
 
-            // Calculate the angle based on the movement direction of the player.
-            // Once calculated, set the player's attack to that rotation.
-            float angle = Mathf.Atan2(lastFacingDirection.x, -lastFacingDirection.y) * Mathf.Rad2Deg;
-            playerAttack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
-        else
+        else if (Time.time - lastAttackTime > bombCoolDown)
         {
-            Debug.LogWarning("Rigidbody2D not found on player attack."); // Debug here in case issue occurs.
+            bombs += 3;
         }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            // Spawn the attack at the player's position and give it a variable name.
+            playerAttack = Instantiate(playerWeapon, playerTransform.position, Quaternion.identity);
+            // Get the rigidbody of the player's attack.
+            Rigidbody2D playerAttackRb = playerAttack.GetComponent<Rigidbody2D>();
+            // As long as the playerAttack's rigidbody exits (does not equal null), run code below.
+            if (playerAttackRb != null)
+            {
+                // Set the direction the attack moves in the direction the player is facing.
+                playerAttackRb.velocity = lastFacingDirection * playerAttackSpeed;
+
+                // Calculate the angle based on the movement direction of the player.
+                // Once calculated, set the player's attack to that rotation.
+                float angle = Mathf.Atan2(lastFacingDirection.x, -lastFacingDirection.y) * Mathf.Rad2Deg;
+                playerAttack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            }
+            else
+            {
+                Debug.LogWarning("Rigidbody2D not found on player attack."); // Debug here in case issue occurs.
+            }
+
+
+        }
+        else if (Input.GetKey(KeyCode.Z) && bombs >= 1)
+        {
+            // Spawn the attack at the player's position and give it a variable name.
+            playerAttack = Instantiate(playerBomb, playerTransform.position, Quaternion.identity);
+            // Get the rigidbody of the player's attack.
+            Rigidbody2D playerAttackRb = playerAttack.GetComponent<Rigidbody2D>();
+            // As long as the playerAttack's rigidbody exits (does not equal null), run code below.
+            if (playerAttackRb != null)
+            {
+                // Set the direction the attack moves in the direction the player is facing.
+                playerAttackRb.velocity = lastFacingDirection * playerAttackSpeed;
+
+                // Calculate the angle based on the movement direction of the player.
+                // Once calculated, set the player's attack to that rotation.
+                float angle = Mathf.Atan2(lastFacingDirection.x, -lastFacingDirection.y) * Mathf.Rad2Deg;
+                playerAttack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            }
+            else
+            {
+                Debug.LogWarning("Rigidbody2D not found on player attack."); // Debug here in case issue occurs.
+            }
+            bombs -= 1;
+            Debug.Log($"Bomb: {bombs}");
+
+        }
+
+        /* // Spawn the attack at the player's position and give it a variable name.
+         GameObject playerAttack = Instantiate(playerWeapon, playerTransform.position, Quaternion.identity);
+         // Get the rigidbody of the player's attack.
+         Rigidbody2D playerAttackRb = playerAttack.GetComponent<Rigidbody2D>();
+
+         // As long as the playerAttack's rigidbody exits (does not equal null), run code below.
+         if (playerAttackRb != null)
+         {
+             // Set the direction the attack moves in the direction the player is facing.
+             playerAttackRb.velocity = lastFacingDirection * playerAttackSpeed;
+
+             // Calculate the angle based on the movement direction of the player.
+             // Once calculated, set the player's attack to that rotation.
+             float angle = Mathf.Atan2(lastFacingDirection.x, -lastFacingDirection.y) * Mathf.Rad2Deg;
+             playerAttack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+         }
+         else
+         {
+             Debug.LogWarning("Rigidbody2D not found on player attack."); // Debug here in case issue occurs.
+         }*/
 
         lastAttackTime = Time.time; // Begin attack cooldown.       
     }
@@ -430,4 +493,5 @@ public class PlayerBehavior : MonoBehaviour
             transform.position = new Vector3(0, 0, transform.position.z);
         }
     }
+    
 }

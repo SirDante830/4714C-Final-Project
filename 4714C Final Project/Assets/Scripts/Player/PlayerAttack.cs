@@ -8,7 +8,9 @@ public class PlayerAttack : MonoBehaviour
     //public GameObject explosionAnimation; // This needs to be assigned in the inspector of the player weapon. (Not doing).
     private PlayerBehavior pB; // This is a reference to the player behavior script which is used in different parts of the script.
     private int enemyHitScore = 10; // This is the amount of score the player is given when they hit an enemy.
-    private int damageDealt = 25; // This is the amount of damage the player's weapon deals to enemies.
+    public int damageDealt = 25; // This is the amount of damage the player's weapon deals to enemies.
+    public GameObject bombExplosion;
+    public float radius = 5.0f;
 
     void Start()
     {
@@ -26,7 +28,18 @@ public class PlayerAttack : MonoBehaviour
         {
             // If the arrow hits an enemy, deal damage to the enemy, change the player's score, and destroy the arrow.
             // Right before destroying, call player weapon destroyed function to allow the player to attack again.
-            hit.GetComponent<EnemyScript>().EnemyTakeDamage(damageDealt);
+            if (this.CompareTag("Arrow"))
+            {
+                hit.GetComponent<EnemyScript>().EnemyTakeDamage(damageDealt);
+            }
+            else if (this.CompareTag("Bomb"))
+            {
+                //Use explosion script here
+                damageDealt += 10;
+                hit.GetComponent<EnemyScript>().EnemyTakeDamage(damageDealt);
+                damageDealt -= 10;
+            }
+           
             pB.ChangeScore(enemyHitScore);
             pB.WeaponDestroyed();
             Destroy(this.gameObject);
@@ -36,4 +49,15 @@ public class PlayerAttack : MonoBehaviour
             Destroy(hit.gameObject);
         }
     }
+    /*void explosion()
+    {
+        Instantiate(bombExplosion, transform.position, transform.rotation);
+        Collider[] Colliders = Physics.OverlapSphere(transform.position, radius);
+        foreach (Collider Enemy in Colliders)
+        {
+            GetComponent<EnemyScript>().EnemyTakeDamage(damageDealt);
+        }
+
+
+    }*/
 }
