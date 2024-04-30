@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
         }
         finally
         {
-            pB.PlayerClass();
+            //pB.PlayerClass();
         }
     }
 }

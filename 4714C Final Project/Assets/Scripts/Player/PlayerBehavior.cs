@@ -109,6 +109,12 @@ public class PlayerBehavior : MonoBehaviour
         // Function that gives the player a random class, but will probably change in the future for player to choose their class.
         //PlayerClass();
 
+        // Check to see if the classColor has been set. If not, set it a default white color.
+        if (classColor == new Color (0, 0, 0, 0))
+        {
+            classColor = Color.white;
+        }
+
         // Set player lives to the max at the start. Do this before setting UI so it is up to date.
         Lives = maxLives;
 
@@ -185,10 +191,6 @@ public class PlayerBehavior : MonoBehaviour
         this.GetComponent<Renderer>().material.color = Color.red;
         yield return new WaitForSeconds(colorChangeTime);
         this.GetComponent<Renderer>().material.color = classColor;
-        /*yield return new WaitForSeconds(colorChangeTime);
-        this.GetComponent<Renderer>().material.color = Color.red;
-        yield return new WaitForSeconds(colorChangeTime);
-        this.GetComponent <Renderer>().material.color = classColor;*/
     }
 
     // Function that handles the damage the player takes. 
@@ -366,23 +368,7 @@ public class PlayerBehavior : MonoBehaviour
         {
             // Spawn the attack at the player's position and give it a variable name.
             playerAttack = Instantiate(sword, playerTransform.position, Quaternion.identity);
-            // Get the rigidbody of the player's attack.
-            Rigidbody2D playerAttackRb = playerAttack.GetComponent<Rigidbody2D>();
-            // As long as the playerAttack's rigidbody exits (does not equal null), run code below.
-            if (playerAttackRb != null)
-            {
-                // Set the direction the attack moves in the direction the player is facing.
-                playerAttackRb.velocity = lastFacingDirection * playerAttackSpeed;
-
-                // Calculate the angle based on the movement direction of the player.
-                // Once calculated, set the player's attack to that rotation.
-                float angle = Mathf.Atan2(lastFacingDirection.x, -lastFacingDirection.y) * Mathf.Rad2Deg;
-                playerAttack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            }
-            else
-            {
-                Debug.LogWarning("Rigidbody2D not found on player attack."); // Debug here in case issue occurs.
-            }
+            playerAttack.transform.SetParent(this.gameObject.transform);
         }
 
 

@@ -163,13 +163,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff2190a2fa543ea4d85870828168de07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  className: 
   playerWeapon: {fileID: 2954329687501954823, guid: e31199de369f8cf418f1d5e7d370a38f, type: 3}
+  playerBomb: {fileID: 0}
+  sword: {fileID: 0}
   playerClassName:
   - archer
   - wizard
   - blueberry
   livesText: {fileID: 0}
   scoreText: {fileID: 0}
+  bombsText: {fileID: 0}
   gameOverDisplay: {fileID: 0}
 --- !u!95 &9051289877304096162
 Animator:

@@ -12,6 +12,7 @@ public class PlayerAttack : MonoBehaviour
     private int enemyHitScore = 10; // This is the amount of score the player is given when they hit an enemy.
     public int damageDealt = 25; // This is the amount of damage the player's weapon deals to enemies.
     public GameObject bombExplosion;
+    private int bombDamageDealt = 35;
 
     void Start()
     {
@@ -21,7 +22,7 @@ public class PlayerAttack : MonoBehaviour
         // Destroy the player attack after a set amount of time so it does not exist for too long.
         if (this.CompareTag("Sword"))
         {
-            Destroy(this.gameObject, 0.09f);
+            Destroy(this.gameObject, 0.42f);
         }
         else
         {
@@ -36,20 +37,23 @@ public class PlayerAttack : MonoBehaviour
         {
             // If the arrow hits an enemy, deal damage to the enemy, change the player's score, and destroy the arrow.
             // Right before destroying, call player weapon destroyed function to allow the player to attack again.
-            if (this.CompareTag("Arrow"))
+            if (this.CompareTag("Arrow") || this.CompareTag("Sword"))
             {
                 hit.GetComponent<EnemyScript>().EnemyTakeDamage(damageDealt);
             }
             else if (this.CompareTag("Bomb"))
             {
                 //Use explosion script here
-                damageDealt += 10;
-                hit.GetComponent<EnemyScript>().EnemyTakeDamage(damageDealt);
-                damageDealt -= 10;
+                hit.GetComponent<EnemyScript>().EnemyTakeDamage(bombDamageDealt);
             }
            
+            // Check to make sure the weapon is not the sword so that the sword attack cannot be spammed.
+            if (!this.CompareTag("Sword"))
+            {
+                pB.WeaponDestroyed();
+            }
+            
             pB.ChangeScore(enemyHitScore);
-            pB.WeaponDestroyed();
             Destroy(this.gameObject);
         }
         else if (hit.CompareTag("Projectile"))
