@@ -82,6 +82,7 @@ public class PlayerBehavior : MonoBehaviour
     // UI variables.
     [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI bombsText;
     [SerializeField] private GameObject gameOverDisplay;
 
     // Delegate and event when game is over.
@@ -452,6 +453,8 @@ public class PlayerBehavior : MonoBehaviour
 
         // Set the scoreText to the text in "" + the current score variable value.
         scoreText.text = _score + " Score";
+
+        bombsText.text = "Bombs " + bombs;
     }
 
     // Coroutine that starts when the player has no more lives.
