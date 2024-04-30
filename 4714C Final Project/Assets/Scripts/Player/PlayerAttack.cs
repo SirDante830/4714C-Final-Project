@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     public int damageDealt = 25; // This is the amount of damage the player's weapon deals to enemies.
     public GameObject bombExplosion;
     public float radius = 5.0f;
+    private int bombDamage = 35;
 
     void Start()
     {
@@ -35,9 +36,7 @@ public class PlayerAttack : MonoBehaviour
             else if (this.CompareTag("Bomb"))
             {
                 //Use explosion script here
-                damageDealt += 10;
-                hit.GetComponent<EnemyScript>().EnemyTakeDamage(damageDealt);
-                damageDealt -= 10;
+                hit.GetComponent<EnemyScript>().EnemyTakeDamage(bombDamage);
             }
            
             pB.ChangeScore(enemyHitScore);

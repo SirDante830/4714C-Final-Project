@@ -39,10 +39,16 @@ public class GameManager : MonoBehaviour
 
         // Invoke the spawning enemies function and repeat it every 15 seconds.
         InvokeRepeating("SpawnEnemies", 2f, 15f);
-
-        // Load the player data
-        LoadPlayer();
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            LoadScene("Game");
+        }
+    }
+
     // Function that loads the inputted scene string name
     void LoadScene(string sceneName)
     {
@@ -125,7 +131,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Load the player data.
-    private void LoadPlayer()
+    public void LoadPlayer()
     {
         try
         {
