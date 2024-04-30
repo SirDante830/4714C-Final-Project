@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Xml;
 using UnityEngine;
 
 // Make sure this script is assigned to each of the player weapons (the arrow weapon used for each class).
@@ -10,8 +12,6 @@ public class PlayerAttack : MonoBehaviour
     private int enemyHitScore = 10; // This is the amount of score the player is given when they hit an enemy.
     public int damageDealt = 25; // This is the amount of damage the player's weapon deals to enemies.
     public GameObject bombExplosion;
-    public float radius = 5.0f;
-    private int bombDamage = 35;
 
     void Start()
     {
@@ -19,7 +19,14 @@ public class PlayerAttack : MonoBehaviour
         pB = GameObject.FindWithTag("Player").GetComponent<PlayerBehavior>();
 
         // Destroy the player attack after a set amount of time so it does not exist for too long.
-        Destroy(this.gameObject, 4.5f);
+        if (this.CompareTag("Sword"))
+        {
+            Destroy(this.gameObject, 0.09f);
+        }
+        else
+        {
+            Destroy(this.gameObject, 4.5f);
+        }
     }
 
     // When the weapon collides with something, check the tag to see what it is. 
@@ -36,7 +43,9 @@ public class PlayerAttack : MonoBehaviour
             else if (this.CompareTag("Bomb"))
             {
                 //Use explosion script here
-                hit.GetComponent<EnemyScript>().EnemyTakeDamage(bombDamage);
+                damageDealt += 10;
+                hit.GetComponent<EnemyScript>().EnemyTakeDamage(damageDealt);
+                damageDealt -= 10;
             }
            
             pB.ChangeScore(enemyHitScore);
