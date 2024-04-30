@@ -555,8 +555,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1045,8 +1045,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1125,8 +1125,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -173}
-  m_SizeDelta: {x: 415.5168, y: 83.47839}
+  m_AnchoredPosition: {x: 0.508, y: -171.984}
+  m_SizeDelta: {x: 414.5, y: 85.511}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &934241708
 MonoBehaviour:
@@ -1149,7 +1149,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.21568629, g: 0.21568629, b: 0.21568629, a: 1}
+    m_NormalColor: {r: 0.21568629, g: 0.21568629, b: 0.21568629, a: 0}
     m_HighlightedColor: {r: 0, g: 0, b: 0, a: 1}
     m_PressedColor: {r: 0, g: 0, b: 0, a: 1}
     m_SelectedColor: {r: 0, g: 0, b: 0, a: 1}
@@ -2054,8 +2054,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4, y: 33}
-  m_SizeDelta: {x: 341.7466, y: 109.9804}
+  m_AnchoredPosition: {x: 0, y: 18.312}
+  m_SizeDelta: {x: 324.889, y: 82.435}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1306232249
 MonoBehaviour:
@@ -2078,7 +2078,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.21568629, g: 0.21568629, b: 0.21568629, a: 1}
+    m_NormalColor: {r: 0.21568629, g: 0.21568629, b: 0.21568629, a: 0}
     m_HighlightedColor: {r: 0, g: 0.020182133, b: 1, a: 1}
     m_PressedColor: {r: 0.06132078, g: 0.08086421, b: 1, a: 1}
     m_SelectedColor: {r: 0.075054124, g: 0.023584902, b: 1, a: 1}
