@@ -8,6 +8,7 @@ TagManager:
   - Arrow
   - Projectile
   - Bomb
+  - Sword
   layers:
   - Default
   - TransparentFX
