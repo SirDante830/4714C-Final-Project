@@ -33,6 +33,8 @@ public class PlayerBehavior : MonoBehaviour
     private float playerAttackSpeed = 10.5f;
     public GameObject playerBomb;
     private float bombCoolDown = 5.0f;
+    public GameObject sword;
+    private bool isWalking = false;
 
     // Create a list of the various classes that the player can be.
     [HideInInspector] public List<string> playerClassName = new List<string>()
@@ -127,6 +129,12 @@ public class PlayerBehavior : MonoBehaviour
     {
         // Run function that controls the player's movement in fixed update for accurate physics interactions.
         PlayerMovement();
+       /* if (isWalking)
+        {
+            Vector3 vector = Vector3.left * horizontalMovement + Vector3.down * verticalMovement;
+            sword.rotation = Quaternion.LookRotation(Vector3.forward, vector);
+                
+        }*/
     }
 
     // Function to check for player input.
@@ -135,8 +143,21 @@ public class PlayerBehavior : MonoBehaviour
         // Assign movement axis references.
         horizontalMovement = Input.GetAxis("Horizontal");
         verticalMovement = Input.GetAxis("Vertical");
+        float MoveX = Input.GetAxisRaw("Horizontal");
+        float MoveY = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Z))
+       /* if(MoveX == 0 && MoveY == 0)
+        {
+            isWalking = false;
+            Vector3 vector = Vector3.left * horizontalMovement + Vector3.down * verticalMovement;
+            sword.rotation = Quaternion.LookRotation(Vector3.forward, vector);
+        }
+        if(MoveX != 0 || MoveY != 0)
+        {
+            isWalking = true;
+        }
+*/
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.E))
         {
             SpawnPlayerWeapon();
         }
@@ -341,6 +362,29 @@ public class PlayerBehavior : MonoBehaviour
             Debug.Log($"Bomb: {bombs}");
 
         }
+        else if (Input.GetKey(KeyCode.E))
+        {
+            // Spawn the attack at the player's position and give it a variable name.
+            playerAttack = Instantiate(sword, playerTransform.position, Quaternion.identity);
+            // Get the rigidbody of the player's attack.
+            Rigidbody2D playerAttackRb = playerAttack.GetComponent<Rigidbody2D>();
+            // As long as the playerAttack's rigidbody exits (does not equal null), run code below.
+            if (playerAttackRb != null)
+            {
+                // Set the direction the attack moves in the direction the player is facing.
+                playerAttackRb.velocity = lastFacingDirection * playerAttackSpeed;
+
+                // Calculate the angle based on the movement direction of the player.
+                // Once calculated, set the player's attack to that rotation.
+                float angle = Mathf.Atan2(lastFacingDirection.x, -lastFacingDirection.y) * Mathf.Rad2Deg;
+                playerAttack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            }
+            else
+            {
+                Debug.LogWarning("Rigidbody2D not found on player attack."); // Debug here in case issue occurs.
+            }
+        }
+
 
         /* // Spawn the attack at the player's position and give it a variable name.
          GameObject playerAttack = Instantiate(playerWeapon, playerTransform.position, Quaternion.identity);
