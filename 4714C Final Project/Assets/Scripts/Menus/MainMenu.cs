@@ -43,6 +43,10 @@ public class MainMenu : MonoBehaviour
         CreateMap.mapWidth = (int)randomSize;
         CreateMap.mapHeight = (int)randomSize;
 
+        // Reset player attack damage.
+        PlayerAttack.damageDealt = 25;
+        PlayerAttack.bombDamageDealt = 35;
+
         LoadScene("Game");
     }
 
@@ -59,6 +63,10 @@ public class MainMenu : MonoBehaviour
         CreateMap.mapWidth = (int)randomSize;
         CreateMap.mapHeight = (int)randomSize;
 
+        // Reset player attack damage.
+        PlayerAttack.damageDealt = 25;
+        PlayerAttack.bombDamageDealt = 35;
+
         LoadScene("Game");
     }
 
@@ -74,6 +82,10 @@ public class MainMenu : MonoBehaviour
         float randomSize = Random.Range(desertMinMapSize, desertMaxMapSize);
         CreateMap.mapWidth = (int)randomSize;
         CreateMap.mapHeight = (int)randomSize;
+
+        // Reset player attack damage.
+        PlayerAttack.damageDealt = 25;
+        PlayerAttack.bombDamageDealt = 35;
 
         LoadScene("Game");
     }

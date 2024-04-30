@@ -151,6 +151,12 @@ public class GameManager : MonoBehaviour
             // Set player's class name.
             pB.className = data.playerClass;
 
+            // Set saved level up upgrades.
+            pB.maxLives = data.maxLives;
+            pB.playerSpeed = data.playerSpeed;
+            PlayerAttack.damageDealt = data.damage;
+            PlayerAttack.bombDamageDealt = data.bombDamage;
+
             // Set the player UI.
             pB.SetUI();
 

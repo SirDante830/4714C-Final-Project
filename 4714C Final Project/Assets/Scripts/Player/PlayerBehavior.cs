@@ -9,9 +9,12 @@ using Unity.Burst.CompilerServices;
 
 public class PlayerBehavior : MonoBehaviour
 {
+    // Create singleton reference.
+    public static PlayerBehavior instance;
+
     // Variables related to player movement.
     private Rigidbody2D rb2d;
-    private float playerSpeed = 7.0f;
+    [HideInInspector] public float playerSpeed = 7.0f;
     private float horizontalMovement; // Used for both movement and sprite change.
     private float verticalMovement; // Used for both movement and sprite change.
 
@@ -44,7 +47,7 @@ public class PlayerBehavior : MonoBehaviour
     };
 
     // Variables for lives and score.
-    private int maxLives = 100;
+    [HideInInspector] public int maxLives = 50;
     private int _lives = 0;
     private int bombs = 3;
 
@@ -96,6 +99,9 @@ public class PlayerBehavior : MonoBehaviour
 
     void Start()
     {
+        // Set singleton reference.
+        instance = this;
+
         // Set references to player components.
         rb2d = GetComponent<Rigidbody2D>(); // Set rigidbody reference.
         playerAnimator = GetComponent<Animator>(); // Set animator reference.

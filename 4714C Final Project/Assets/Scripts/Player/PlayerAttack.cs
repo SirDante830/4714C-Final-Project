@@ -10,12 +10,16 @@ public class PlayerAttack : MonoBehaviour
     //public GameObject explosionAnimation; // This needs to be assigned in the inspector of the player weapon. (Not doing).
     private PlayerBehavior pB; // This is a reference to the player behavior script which is used in different parts of the script.
     private int enemyHitScore = 10; // This is the amount of score the player is given when they hit an enemy.
-    public int damageDealt = 25; // This is the amount of damage the player's weapon deals to enemies.
+    public static int damageDealt = 25; // This is the amount of damage the player's weapon deals to enemies.
     public GameObject bombExplosion;
-    private int bombDamageDealt = 35;
+    public static int bombDamageDealt = 35;
+    private LevelBar levelBar;
 
     void Start()
     {
+        // Set reference to level bar.
+        levelBar = GameObject.FindWithTag("LevelBar").GetComponent<LevelBar>();
+
         // Assign the reference to the player script.
         pB = GameObject.FindWithTag("Player").GetComponent<PlayerBehavior>();
 
@@ -35,6 +39,9 @@ public class PlayerAttack : MonoBehaviour
     {
         if (hit.CompareTag("Enemy"))
         {
+            // Give the player some experience.
+            levelBar.levelSystem.AddExperience(15);
+
             // If the arrow hits an enemy, deal damage to the enemy, change the player's score, and destroy the arrow.
             // Right before destroying, call player weapon destroyed function to allow the player to attack again.
             if (this.CompareTag("Arrow") || this.CompareTag("Sword"))
@@ -52,24 +59,16 @@ public class PlayerAttack : MonoBehaviour
             {
                 pB.WeaponDestroyed();
             }
-            
+
             pB.ChangeScore(enemyHitScore);
             Destroy(this.gameObject);
         }
         else if (hit.CompareTag("Projectile"))
         {
+            // Give the player some experience.
+            levelBar.levelSystem.AddExperience(5);
+
             Destroy(hit.gameObject);
         }
     }
-    /*void explosion()
-    {
-        Instantiate(bombExplosion, transform.position, transform.rotation);
-        Collider[] Colliders = Physics.OverlapSphere(transform.position, radius);
-        foreach (Collider Enemy in Colliders)
-        {
-            GetComponent<EnemyScript>().EnemyTakeDamage(damageDealt);
-        }
-
-
-    }*/
 }
